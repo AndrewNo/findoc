@@ -1,0 +1,78 @@
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  width: 98%;
+  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    a {
+      display: block;
+      text-decoration: none;
+      padding: 20px;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: "Raleway", sans-serif;
+      font-weight: 700;
+      &:hover {
+        background-color: #fff;
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+  li.active {
+    background-color: #fff;
+    a {
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+.active_accounts {
+  h3 {
+    font-family: "Raleway", sans-serif;
+
+  }
+}
+
+.new_account {
+  font-family: "Raleway", sans-serif;
+  p {
+    display: inline-block;
+  }
+}
+
+#show-modal {
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  width: auto;
+  padding: 10px;
+  background: rgba(255, 255, 255, 1);
+  background: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 1) 12%, rgba(247, 247, 247, 1) 24%, rgba(230, 230, 230, 1) 49%, rgba(225, 225, 225, 1) 73%, rgba(222, 222, 222, 1) 89%, rgba(212, 212, 212, 1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(12%, rgba(255, 255, 255, 1)), color-stop(24%, rgba(247, 247, 247, 1)), color-stop(49%, rgba(230, 230, 230, 1)), color-stop(73%, rgba(225, 225, 225, 1)), color-stop(89%, rgba(222, 222, 222, 1)), color-stop(100%, rgba(212, 212, 212, 1)));
+  background: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 1) 12%, rgba(247, 247, 247, 1) 24%, rgba(230, 230, 230, 1) 49%, rgba(225, 225, 225, 1) 73%, rgba(222, 222, 222, 1) 89%, rgba(212, 212, 212, 1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(255, 255, 255, 1) 12%, rgba(247, 247, 247, 1) 24%, rgba(230, 230, 230, 1) 49%, rgba(225, 225, 225, 1) 73%, rgba(222, 222, 222, 1) 89%, rgba(212, 212, 212, 1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(255, 255, 255, 1) 12%, rgba(247, 247, 247, 1) 24%, rgba(230, 230, 230, 1) 49%, rgba(225, 225, 225, 1) 73%, rgba(222, 222, 222, 1) 89%, rgba(212, 212, 212, 1) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1) 12%, rgba(247, 247, 247, 1) 24%, rgba(230, 230, 230, 1) 49%, rgba(225, 225, 225, 1) 73%, rgba(222, 222, 222, 1) 89%, rgba(212, 212, 212, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d4d4d4', GradientType=1);
+  -webkit-box-shadow: -9px -8px 103px -12px rgba(0,0,0,0.75);
+  -moz-box-shadow: -9px -8px 103px -12px rgba(0,0,0,0.75);
+  box-shadow: -9px -8px 103px -12px rgba(0,0,0,0.75);
+}
