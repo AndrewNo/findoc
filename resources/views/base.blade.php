@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('fonts//font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <title>Document</title>
+    @yield('links')
 </head>
 <body>
 <header>

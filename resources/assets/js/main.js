@@ -1,12 +1,12 @@
-//import Vue from `vue`;
-//import Hero from `./components/Hero.vue`;
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.component('Profile', require('./components/Profile.vue'));
+Vue.component('modal-account', require('./components/AccountModal.vue'));
 
-new Vue({
-    el: 'body',
-    components: { profile }
+new Vue ({
+    el: '#add_account_modal',
+    data: {
+        showModal: false
+    }
 });

@@ -1,14 +1,12 @@
 @extends('base')
 
 @section('content')
-    <div id="app">
-        <profile></profile>
-    </div>
+
     <div class="new_account">
         <p>Add new account</p>
-        <div id="add_account">
-            <div id="show-modal"><i class="fa fa-plus" aria-hidden="true"></i></div>
-
+        <div id="add_account_modal">
+            <div id="show-modal" @click="showModal = true"><i class="fa fa-plus" aria-hidden="true"></i></div>
+            <modal-account v-if="showModal" @close="showModal = false"></modal-account>
         </div>
     </div>
 
@@ -17,5 +15,5 @@
     </div>
 
 
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}" charset="utf-8"></script>
 @endsection
