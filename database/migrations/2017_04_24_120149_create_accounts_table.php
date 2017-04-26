@@ -18,6 +18,7 @@ class CreateAccountsTable extends Migration
             $table->string('title');
             $table->float('total_sum')->default(0);
             $table->string('currency');
+            $table->string('pic')->nullable();
             $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExist('accounts');
+        Schema::dropIfExists('accounts');
     }
 }

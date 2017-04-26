@@ -16,3 +16,4 @@ Route::get('/', function (){
 });
 
 Route::get('/accounts', 'AccountsController@index');
+Route::post('account/add', 'AccountsController@store');
