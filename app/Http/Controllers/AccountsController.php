@@ -19,7 +19,6 @@ class AccountsController extends Controller
         $response = $request_api->get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json', ['verify' => false])->getBody();
 
         $currencies = json_decode($response);
-
         $accounts = Account::all();
 
         return view('accounts.index', [
@@ -77,7 +76,15 @@ class AccountsController extends Controller
      */
     public function edit(Account $account)
     {
-        //
+        $request_api = new Client();
+        $response = $request_api->get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json', ['verify' => false])->getBody();
+
+        $currencies = json_decode($response);
+
+        return view('accounts.edit', [
+            'account' =>$account,
+            'currencies' => $currencies
+        ]);
     }
 
     /**
@@ -89,7 +96,14 @@ class AccountsController extends Controller
      */
     public function update(Request $request, Account $account)
     {
-        //
+        $account->title = $request->title;
+        $account->total_sum = $request->total_sum;
+        $account->currency = $request->currency;
+        $account->pic = $request->pic;
+
+        $account->save();
+
+        return redirect('/accounts');
     }
 
     /**
@@ -100,16 +114,24 @@ class AccountsController extends Controller
      */
     public function destroy(Account $account)
     {
-        //
+        $account->delete();
+
+        return back();
     }
 
-    public function getCurrency()
+    public function nonActive(Request $request)
     {
-        $currency = new Client();
-        $response = $currency->get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json', ['verify' => false])->getBody();
 
-        $cur = json_decode($response);
+        $account = Account::find($request->id);
 
-        return $cur;
+        if ($request->active  == 'true') {
+            $account->is_active = 1;
+        }else {
+            $account->is_active = 0;
+        }
+
+        $account->save();
+
+        return back();
     }
 }

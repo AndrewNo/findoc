@@ -17,7 +17,8 @@
             <li @if(\Illuminate\Support\Facades\Request::is('/')) class="active" @endif><a href="/" >Home</a></li>
             <li @if(\Illuminate\Support\Facades\Request::is('accounts')) class="active" @endif><a
                         href="/accounts">Accounts</a></li>
-            <li><a href="">Income</a></li>
+            <li @if(\Illuminate\Support\Facades\Request::is('incomes')) class="active" @endif><a
+                        href="/incomes">Income</a></li>
             <li><a href="">Outcome</a></li>
         </ul>
     </div>

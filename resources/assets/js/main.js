@@ -40,7 +40,6 @@ modal_add_account.addEventListener('click', function () {
         }
     }, true);
 
-
 });
 
 

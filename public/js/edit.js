@@ -63,62 +63,41 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 46);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 11:
-/***/ (function(module, exports) {
+/***/ 44:
+/***/ (function(module, exports, __webpack_require__) {
 
-var modal_add_account = document.getElementById('add_account_modal');
-var modal_mask = document.querySelector('.modal-mask');
+module.exports = __webpack_require__(9);
 
-modal_add_account.addEventListener('click', function () {
-
-    modal_mask.style.display = 'table';
-
-    var add_img_button = document.querySelector('.modal-body .add_img');
-
-    add_img_button.addEventListener('click', function () {
-
-        var images_list = document.querySelector('.modal-body .images');
-
-        images_list.style.display = 'block';
-
-        var account_image = document.querySelectorAll('.modal-body .images ul li');
-        account_image.forEach(function (item) {
-            item.addEventListener('click', function () {
-                var img = document.createElement('img');
-                img.src = this.children[0].attributes[0].value;
-                img.style.width = '40px';
-
-                add_img_button.innerText = '';
-                add_img_button.appendChild(img);
-                document.querySelector('input[name="pic"]').value = this.children[0].attributes[0].value;
-                images_list.style.display = 'none';
-            });
-        });
-    });
-
-    document.querySelector('.modal-default-button').addEventListener('click', function () {
-        modal_mask.style.display = 'none';
-    });
-
-    window.addEventListener("keydown", function (e) {
-        if (e.keyCode == 27) {
-            modal_mask.style.display = 'none';
-        }
-    }, true);
-});
 
 /***/ }),
 
-/***/ 46:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 9:
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(11);
+var change_img = document.querySelector('.account_edit .add_img');
 
+change_img.addEventListener('click', function () {
+
+    var images_list = document.querySelector('.account_edit .images');
+
+    images_list.style.display = 'block';
+
+    var account_image = document.querySelectorAll('.account_edit .images ul li');
+    account_image.forEach(function (item) {
+        item.addEventListener('click', function () {
+            var img = document.querySelector('.account_edit .add_img img');
+            img.src = this.children[0].attributes[0].value;
+
+            document.querySelector('input[name="pic"]').value = this.children[0].attributes[0].value;
+            images_list.style.display = 'none';
+        });
+    });
+});
 
 /***/ })
 

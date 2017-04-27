@@ -35,7 +35,7 @@
                             <div class="images">
                                 <ul>
                                     @foreach(glob('images/accounts_icons/*.png') as $img)
-                                        <li><img src="{{ $img }}" alt=""></li>
+                                        <li><img src="{{ asset($img) }}" alt=""></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -61,30 +61,111 @@
     <div class="active_accounts">
         <h3>Active accounts:</h3>
         <table class="account">
-            <tr>
-                <th>#</th>
-                <th>Pic</th>
-                <th>Title</th>
-                <th>Sum</th>
-                <th>Currency</th>
-            </tr>
-
-        @foreach($accounts as $account)
-            @if($account->is_active == true)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td><img src="{{ $account->pic }}" alt=""></td>
-                        <td>{{ $account->title }}</td>
-                        <td>{{ $account->total_sum }}</td>
-                        <td>{{ $account->currency }}</td>
-                    </tr>
+            @if(\App\Models\Account::where('is_active', '=', 1)->count() != 0)
+                <tr>
+                    <th>Pic</th>
+                    <th>Title</th>
+                    <th>Sum</th>
+                    <th>Currency</th>
+                    <th>Inactive</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
             @endif
-        @endforeach
+            @foreach($accounts as $account)
+                @if($account->is_active == true)
+                    <tr>
+                        <td><img src="{{ asset($account->pic) }}" alt=""></td>
+                        <td>{{ $account->title }}</td>
+                        <td class="account_sum">
+                            {{ $account->total_sum }}
+                            @foreach($currencies as $currency)
+                                @if($account->currency != 'UAH' && $account->currency == $currency->cc)
+                                    <span class="exchange_rate"> 	&asymp;{!! $account->total_sum * $currency->rate
+                                    !!} UAH</span>
+                                @endif
+                            @endforeach
+
+                        </td>
+                        <td>{{ $account->currency }}</td>
+                        <td class="inactive">
+                            <form action="account/non-active" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $account->id }}">
+                                <input type="hidden" name="active" value="false">
+                                <button type="submit"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                        <td class="edit">
+                            <button><a href="account/{{ $account->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            </button>
+                        </td>
+                        <td class="delete">
+                            <form action="/account/destroy/{{ $account->id }}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('delete') }}
+                                <button type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
         </table>
     </div>
 
     <div class="inactive_accounts">
         <h3>Inactive accounts:</h3>
+        <table class="account">
+            @if(\App\Models\Account::where('is_active', '=', 0)->count() != 0)
+                <tr>
+                    <th>Pic</th>
+                    <th>Title</th>
+                    <th>Sum</th>
+                    <th>Currency</th>
+                    <th>Active</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            @endif
+            @foreach($accounts as $account)
+                @if($account->is_active == false)
+                    <tr>
+                        <td><img src="{{ asset($account->pic) }}" alt=""></td>
+                        <td>{{ $account->title }}</td>
+                        <td class="account_sum">
+                            {{ $account->total_sum }}
+                            @foreach($currencies as $currency)
+                                @if($account->currency != 'UAH' && $account->currency == $currency->cc)
+                                    <span class="exchange_rate"> 	&asymp;{!! $account->total_sum * $currency->rate
+                                    !!} UAH</span>
+                                @endif
+                            @endforeach
+
+                        </td>
+                        <td>{{ $account->currency }}</td>
+                        <td class="inactive active">
+                            <form action="account/non-active" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $account->id }}">
+                                <input type="hidden" name="active" value="true">
+                                <button type="submit"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                        <td class="edit">
+                            <button><a href="account/{{ $account->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            </button>
+                        </td>
+                        <td class="delete">
+                            <form action="/account/destroy/{{ $account->id }}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('delete') }}
+                                <button type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+        </table>
     </div>
 
 
