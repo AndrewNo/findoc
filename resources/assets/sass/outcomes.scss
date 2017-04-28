@@ -1,0 +1,96 @@
+.add_outcome {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid silver;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(160, 160, 160, 1) 37%, rgba(20, 20, 20, 1) 92%, rgba(0, 0, 0, 1) 100%); /* w3c */
+
+  i {
+    vertical-align: middle;
+  }
+}
+
+.outcome_modal {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  .outcome_add_new {
+    background-color: #fff;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 100px;
+    h3 {
+      padding-top: 20px;
+      padding-left: 20px;
+      color: #2ab27b;
+    }
+    form {
+      padding: 20px;
+      label, input, select, textarea {
+        display: block;
+        margin: 10px 0;
+      }
+      .add_category, .add_subcategory, .add_seller {
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid silver;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(160, 160, 160, 1) 37%, rgba(20, 20, 20, 1) 92%, rgba(0, 0, 0, 1) 100%); /* w3c */
+        margin-left: 10px;
+
+        i {
+          vertical-align: middle;
+        }
+      }
+      #category_id, #subcategory_id, #seller_id, label[for="subcategory_id"] {
+        display: inline-block;
+      }
+
+    }
+  }
+  .category_add_new {
+    background-color: #fff;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 100px;
+    h3 {
+      padding-top: 20px;
+      padding-left: 20px;
+      color: #2ab27b;
+    }
+    form {
+      padding: 20px;
+      label, input, select, textarea {
+        display: block;
+        margin: 10px 0;
+      }
+      .add_img {
+        display: inline-block;
+        border: 1px solid silver;
+        padding: 5px;
+        cursor: pointer;
+      }
+      .images {
+        display: none;
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          li {
+            display: inline-block;
+            img {
+              width: 50px;
+              vertical-align: middle;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

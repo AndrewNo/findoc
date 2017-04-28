@@ -183,7 +183,9 @@ table.account {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-.modal-container.modal-catgory {
+.modal-container.modal-catgory,
+.modal-container.modal-payer
+{
   display: none;
 }
 
@@ -281,7 +283,8 @@ table.account {
   }
 }
 
-.add_category {
+.add_category,
+.add_payer {
   display: inline-block;
   vertical-align: middle;
   margin-left: 10px;
@@ -291,6 +294,17 @@ table.account {
   background-image: linear-gradient(to bottom right, #FFFFFF 0%, #CFCFCF 100%);
 }
 
-#category_id {
+#category_id,
+#payer_id,
+#total_sum {
   display: inline-block;
+}
+
+#total_sum + span {
+  margin-left: 10px;
+}
+
+#img_category {
+  width: 50px;
+  vertical-align: middle;
 }

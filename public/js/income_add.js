@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 45);
+/******/ 	return __webpack_require__(__webpack_require__.s = 49);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -380,7 +380,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(29);
+var normalizeHeaderName = __webpack_require__(23);
 
 var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 var DEFAULT_CONTENT_TYPE = {
@@ -471,7 +471,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(37)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)))
 
 /***/ }),
 /* 2 */
@@ -481,12 +481,12 @@ module.exports = defaults;
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(21);
-var buildURL = __webpack_require__(24);
-var parseHeaders = __webpack_require__(30);
-var isURLSameOrigin = __webpack_require__(28);
+var settle = __webpack_require__(15);
+var buildURL = __webpack_require__(18);
+var parseHeaders = __webpack_require__(24);
+var isURLSameOrigin = __webpack_require__(22);
 var createError = __webpack_require__(5);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(23);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(17);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -582,7 +582,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(26);
+      var cookies = __webpack_require__(20);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -702,7 +702,7 @@ module.exports = function isCancel(value) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(20);
+var enhanceError = __webpack_require__(14);
 
 /**
  * Create an Error with the specified message, config, error code, and response.
@@ -765,98 +765,13 @@ module.exports = g;
 
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(33);
-
-var modal_add_account = document.getElementById('show-modal');
-var modal_mask = document.querySelector('.modal-mask');
-var modal_catgory = document.querySelector('div.modal-catgory');
-
-modal_add_account.addEventListener('click', function () {
-
-    modal_mask.style.display = 'table';
-
-    var add_category = document.querySelector('div.add_category');
-
-    add_category.addEventListener('click', function () {
-
-        document.querySelector('.modal-container').style.visibility = 'hidden';
-
-        modal_catgory.style.display = 'table';
-
-        var add_img_button = document.querySelector('.modal-body .add_img');
-
-        add_img_button.addEventListener('click', function () {
-
-            var images_list = document.querySelector('.modal-body .images');
-
-            images_list.style.display = 'block';
-
-            var account_image = document.querySelectorAll('.modal-body .images ul li');
-            account_image.forEach(function (item) {
-                item.addEventListener('click', function () {
-                    var img = document.createElement('img');
-                    img.src = this.children[0].attributes[0].value;
-                    img.style.width = '40px';
-
-                    add_img_button.innerText = '';
-                    add_img_button.appendChild(img);
-                    document.querySelector('input[name="pic"]').value = this.children[0].attributes[0].value;
-                    images_list.style.display = 'none';
-                });
-            });
-        });
-
-        window.addEventListener("keydown", function (e) {
-            if (e.keyCode == 27) {
-                modal_catgory.style.display = 'none';
-                document.querySelector('.modal-container').style.visibility = 'visible';
-            }
-        }, true);
-
-        document.querySelector('.modal-catgory .modal-default-button').addEventListener('click', function () {
-            modal_catgory.style.display = 'none';
-            document.querySelector('.modal-container').style.visibility = 'visible';
-        });
-
-        document.querySelector('.modal-catgory input[type="submit"]').addEventListener('click', function (e) {
-            e.preventDefault();
-            var title = document.querySelector('.modal-catgory input[name="category_title"]').value;
-            var pic = document.querySelector('.modal-catgory input[name="pic"]').value;
-            var type = document.querySelector('.modal-catgory input[name="type"]').value;
-
-            axios.post('category/add', {
-                category_title: title,
-                category_pic: pic,
-                type: type
-            }).then(function (response) {
-                console.log(response);
-            }).catch(function (error) {
-                console.log(error);
-            });
-        });
-    });
-
-    document.querySelector('.modal-default-button').addEventListener('click', function () {
-        modal_mask.style.display = 'none';
-    });
-});
+module.exports = __webpack_require__(9);
 
 /***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(15);
-
-/***/ }),
-/* 15 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -864,7 +779,7 @@ module.exports = __webpack_require__(15);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(6);
-var Axios = __webpack_require__(17);
+var Axios = __webpack_require__(11);
 var defaults = __webpack_require__(1);
 
 /**
@@ -899,14 +814,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(3);
-axios.CancelToken = __webpack_require__(16);
+axios.CancelToken = __webpack_require__(10);
 axios.isCancel = __webpack_require__(4);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(31);
+axios.spread = __webpack_require__(25);
 
 module.exports = axios;
 
@@ -915,7 +830,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 16 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -979,7 +894,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 17 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -987,10 +902,10 @@ module.exports = CancelToken;
 
 var defaults = __webpack_require__(1);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(18);
-var dispatchRequest = __webpack_require__(19);
-var isAbsoluteURL = __webpack_require__(27);
-var combineURLs = __webpack_require__(25);
+var InterceptorManager = __webpack_require__(12);
+var dispatchRequest = __webpack_require__(13);
+var isAbsoluteURL = __webpack_require__(21);
+var combineURLs = __webpack_require__(19);
 
 /**
  * Create a new instance of Axios
@@ -1071,7 +986,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 18 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1130,14 +1045,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 19 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(22);
+var transformData = __webpack_require__(16);
 var isCancel = __webpack_require__(4);
 var defaults = __webpack_require__(1);
 
@@ -1216,7 +1131,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 20 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1242,7 +1157,7 @@ module.exports = function enhanceError(error, config, code, response) {
 
 
 /***/ }),
-/* 21 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1274,7 +1189,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 22 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1301,7 +1216,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 23 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1344,7 +1259,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 24 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1419,7 +1334,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 25 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1438,7 +1353,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 26 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1498,7 +1413,7 @@ module.exports = (
 
 
 /***/ }),
-/* 27 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1519,7 +1434,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 28 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1594,7 +1509,7 @@ module.exports = (
 
 
 /***/ }),
-/* 29 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1613,7 +1528,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 30 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1657,7 +1572,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 31 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1691,12 +1606,11 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 32 */,
-/* 33 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(36);
+window._ = __webpack_require__(29);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -1705,9 +1619,9 @@ window._ = __webpack_require__(36);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(35);
+  window.$ = window.jQuery = __webpack_require__(28);
 
-  __webpack_require__(34);
+  __webpack_require__(27);
 } catch (e) {}
 
 /**
@@ -1716,7 +1630,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(14);
+window.axios = __webpack_require__(8);
 
 //window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -1737,7 +1651,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // });
 
 /***/ }),
-/* 34 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /*!
@@ -4120,7 +4034,7 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 35 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14380,7 +14294,7 @@ return jQuery;
 
 
 /***/ }),
-/* 36 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31469,10 +31383,10 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(42)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(31)(module)))
 
 /***/ }),
-/* 37 */
+/* 30 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -31658,11 +31572,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -31690,12 +31600,173 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 43 */,
-/* 44 */,
-/* 45 */
+/* 32 */,
+/* 33 */,
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(10);
+__webpack_require__(26);
+
+var modal_add_account = document.getElementById('show-modal');
+var modal_mask = document.querySelector('.modal-mask');
+var modal_catgory = document.querySelector('div.modal-catgory');
+var modal_payer = document.querySelector('div.modal-payer');
+
+modal_add_account.addEventListener('click', function () {
+
+    modal_mask.style.display = 'table';
+
+    var add_category = document.querySelector('div.add_category');
+    var add_payer = document.querySelector('div.add_payer');
+    var currency = document.getElementById('account');
+    var category_img = document.getElementById('category_id');
+
+    add_category.addEventListener('click', function () {
+
+        document.querySelector('.modal-container').style.visibility = 'hidden';
+
+        modal_catgory.style.display = 'table';
+
+        var add_img_button = document.querySelector('.modal-body .add_img');
+
+        add_img_button.addEventListener('click', function () {
+
+            var images_list = document.querySelector('.modal-body .images');
+
+            images_list.style.display = 'block';
+
+            var account_image = document.querySelectorAll('.modal-body .images ul li');
+            account_image.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    var img = document.createElement('img');
+                    img.src = this.children[0].attributes[0].value;
+                    img.style.width = '40px';
+
+                    add_img_button.innerText = '';
+                    add_img_button.appendChild(img);
+                    document.querySelector('input[name="pic"]').value = this.children[0].attributes[0].value;
+                    images_list.style.display = 'none';
+                });
+            });
+        });
+
+        window.addEventListener("keydown", function (e) {
+            if (e.keyCode == 27) {
+                modal_catgory.style.display = 'none';
+                document.querySelector('.modal-container').style.visibility = 'visible';
+            }
+        }, true);
+
+        document.querySelector('.modal-catgory .modal-default-button').addEventListener('click', function () {
+            modal_catgory.style.display = 'none';
+            document.querySelector('.modal-container').style.visibility = 'visible';
+        });
+
+        document.querySelector('.modal-catgory input[type="submit"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            var title = document.querySelector('.modal-catgory input[name="category_title"]').value;
+            var pic = document.querySelector('.modal-catgory input[name="pic"]').value;
+            var type = document.querySelector('.modal-catgory input[name="type"]').value;
+
+            axios.post('category/add', {
+                category_title: title,
+                category_pic: pic,
+                type: type
+            }).then(function (response) {
+                var select_category = document.getElementById('category_id');
+                var option = document.createElement('option');
+                option.value = response.data.id;
+                option.innerText = response.data.title;
+                option.setAttribute('selected', '');
+                select_category.appendChild(option);
+
+                var img_category = document.getElementById('img_category');
+                img_category.src = response.data.pic;
+
+                modal_catgory.style.display = 'none';
+                document.querySelector('.modal-container').style.visibility = 'visible';
+            }).catch(function (error) {
+                console.log(error);
+            });
+        });
+    });
+
+    add_payer.addEventListener('click', function () {
+
+        document.querySelector('.modal-container').style.visibility = 'hidden';
+
+        modal_payer.style.display = 'table';
+
+        window.addEventListener("keydown", function (e) {
+            if (e.keyCode == 27) {
+                modal_payer.style.display = 'none';
+                document.querySelector('.modal-container').style.visibility = 'visible';
+            }
+        }, true);
+
+        document.querySelector('.modal-payer .modal-default-button').addEventListener('click', function () {
+            modal_payer.style.display = 'none';
+            document.querySelector('.modal-container').style.visibility = 'visible';
+        });
+
+        document.querySelector('.modal-payer input[type="submit"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            var title = document.querySelector('.modal-payer input[name="payer_title"]').value;
+
+            axios.post('payer/add', {
+                payer_title: title
+            }).then(function (response) {
+                var select_payer = document.getElementById('payer_id');
+                var option = document.createElement('option');
+                option.value = response.data.id;
+                option.innerText = response.data.title;
+                option.setAttribute('selected', '');
+                select_payer.appendChild(option);
+
+                modal_payer.style.display = 'none';
+                document.querySelector('.modal-container').style.visibility = 'visible';
+            }).catch(function (error) {
+                console.log(error);
+            });
+        });
+    });
+
+    currency.addEventListener('change', function () {
+        var currency_title = this.options[this.selectedIndex].dataset.currency;
+
+        document.querySelector('#total_sum + span').innerText = currency_title;
+        document.querySelector('input[name="currency"]').value = currency_title;
+    });
+
+    category_img.addEventListener('change', function () {
+        var category_img = this.options[this.selectedIndex].dataset.categoryPic;
+        document.getElementById('img_category').src = category_img;
+    });
+
+    document.querySelector('.modal-default-button').addEventListener('click', function () {
+        modal_mask.style.display = 'none';
+    });
+});
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(34);
 
 
 /***/ })

@@ -14,6 +14,10 @@ const { mix } = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/main.js', 'public/js')
     .js('resources/assets/js/edit.js', 'public/js')
+    .js('resources/assets/js/outcome_add.js', 'public/js')
     .js('resources/assets/js/income_add.js', 'public/js')
+    .js('resources/assets/js/income_edit.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
+    .sass('resources/assets/sass/outcomes.scss', 'public/css')
+    .sass('resources/assets/sass/income_edit.scss', 'public/css')
     .sass('resources/assets/sass/style.scss', 'public/css');

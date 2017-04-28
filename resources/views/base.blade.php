@@ -19,7 +19,7 @@
                         href="/accounts">Accounts</a></li>
             <li @if(\Illuminate\Support\Facades\Request::is('incomes')) class="active" @endif><a
                         href="/incomes">Income</a></li>
-            <li><a href="">Outcome</a></li>
+            <li @if(\Illuminate\Support\Facades\Request::is('outcomes')) class="active" @endif><a href="/outcomes">Outcome</a></li>
         </ul>
     </div>
 </header>

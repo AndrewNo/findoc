@@ -1,8 +1,12 @@
 {
   "/js/app.js": "/js/app.js",
   "/css/app.css": "/css/app.css",
+  "/css/outcomes.css": "/css/outcomes.css",
+  "/css/income_edit.css": "/css/income_edit.css",
   "/css/style.css": "/css/style.css",
-  "/js/main.js": "/js/main.js",
+  "/js/income_edit.js": "/js/income_edit.js",
   "/js/income_add.js": "/js/income_add.js",
+  "/js/outcome_add.js": "/js/outcome_add.js",
+  "/js/main.js": "/js/main.js",
   "/js/edit.js": "/js/edit.js"
 }

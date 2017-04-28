@@ -47,18 +47,36 @@ class IncomesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        $income = new Income();
+
+        $income->category_id = $request->category_id;
+        $income->account_id = $request->account_id;
+        $income->payer_id = $request->payer_id;
+        $income->total_sum = $request->total_sum;
+        $income->currency = $request->currency;
+        $income->comment = $request->comment;
+
+        $income->save();
+
+        $account = Account::find($request->account_id);
+
+        $account->total_sum = $account->total_sum + $request->total_sum;
+
+        $account->save();
+
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Income  $income
+     * @param  \App\Models\Income $income
      * @return \Illuminate\Http\Response
      */
     public function show(Income $income)
@@ -69,34 +87,87 @@ class IncomesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Income  $income
+     * @param  \App\Models\Income $income
      * @return \Illuminate\Http\Response
      */
     public function edit(Income $income)
     {
-        //
+        $categories = Category::where('type', '=', 'income')->get();
+
+        $payers = Payer::all();
+
+        $accounts = Account::where('is_active', '=', 1)->get();
+
+        return view('incomes.edit', [
+            'income' => $income,
+            'categories' => $categories,
+            'payers' => $payers,
+            'accounts' => $accounts,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Income  $income
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Income $income
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Income $income)
     {
-        //
+        if ($income->account_id == $request->account_id) {
+            $account = Account::find($income->account_id);
+
+            $account->total_sum = ($account->total_sum - $income->total_sum) + $request->total_sum;
+
+            $account->save();
+        } else {
+
+
+            $account = Account::find($request->account_id);
+            $account->total_sum = $account->total_sum + $request->total_sum;
+            $account->save();
+
+            if ($income->total_sum != $account->total_sum) {
+                $prev_account = Account::find($income->account_id);
+                $prev_account->total_sum = $prev_account->total_sum - $income->total_sum;
+                $prev_account->save();
+            } else {
+                $prev_account = Account::find($income->account_id);
+                $prev_account->total_sum = $prev_account->total_sum - $request->total_sum;
+                $prev_account->save();
+            }
+
+        }
+
+        $income->category_id = $request->category_id;
+        $income->account_id = $request->account_id;
+        $income->payer_id = $request->payer_id;
+        $income->total_sum = $request->total_sum;
+        $income->currency = $request->currency;
+        $income->comment = $request->comment;
+        $income->save();
+
+        return redirect('incomes');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Income  $income
+     * @param  \App\Models\Income $income
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Income $income)
+    public
+    function destroy(Income $income)
     {
-        //
+        $account = Account::find($income->account_id);
+
+        $account->total_sum = $account->total_sum - $income->total_sum;
+
+        $account->save();
+
+
+        $income->delete();
+        return back();
     }
 }
