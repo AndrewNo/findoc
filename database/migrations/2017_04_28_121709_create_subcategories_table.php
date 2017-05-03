@@ -17,6 +17,7 @@ class CreateSubcategoriesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('pic')->nullable();
+            $table->integer('category_id')->nullable()->references('id')->on('categories');;
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateSubcategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('subcategories');
     }
 }

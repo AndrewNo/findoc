@@ -41,9 +41,11 @@ modal_add_account.addEventListener('click', function () {
                     add_img_button.appendChild(img);
                     document.querySelector('input[name="pic"]').value = this.children[0].attributes[0].value;
                     images_list.style.display = 'none';
-
                 })
             });
+
+
+
         });
 
         window.addEventListener("keydown", function (e) {

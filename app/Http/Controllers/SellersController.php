@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SellersController extends Controller
 {
@@ -35,7 +36,15 @@ class SellersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = DB::table('sellers')->insertGetId(array(
+            'title' => $request->seller_title
+
+        ));
+
+        $payer = Seller::find($id);
+
+
+        return $payer;
     }
 
     /**

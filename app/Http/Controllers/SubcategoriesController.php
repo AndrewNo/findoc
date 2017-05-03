@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubcategoriesController extends Controller
 {
@@ -35,7 +36,18 @@ class SubcategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $id = DB::table('subcategories')->insertGetId(array(
+            'title' => $request->subcategory_title,
+            'pic' => $request->subcategory_pic,
+            'category_id' => $request->category_id
+        ));
+
+        $subcategory = Subcategory::find($id);
+
+
+        return $subcategory;
     }
 
     /**
@@ -81,5 +93,11 @@ class SubcategoriesController extends Controller
     public function destroy(Subcategory $subcategory)
     {
         //
+    }
+
+    public function getSubcategories(Request $request) {
+        $subcategories = Subcategory::where('category_id', '=', $request->category_id)->get();
+
+        return $subcategories;
     }
 }

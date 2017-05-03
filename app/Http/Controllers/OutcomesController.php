@@ -56,7 +56,24 @@ class OutcomesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $outcome = new Outcome();
+        $outcome->category_id = $request->category_id;
+        $outcome->subcategory_id = $request->subcategory_id;
+        $outcome->account_id = $request->account_id;
+        $outcome->seller_id = $request->seller_id;
+        $outcome->total_sum = $request->total_sum;
+        $outcome->currency = $request->currency;
+        $outcome->comment = $request->comment;
+        $outcome->save();
+
+        $account = Account::find($request->account_id);
+        $account->total_sum = $account->total_sum - $request->total_sum;
+        $account->save();
+
+        return back();
+
     }
 
     /**
@@ -78,7 +95,22 @@ class OutcomesController extends Controller
      */
     public function edit(Outcome $outcome)
     {
-        //
+
+        $accounts = Account::where('is_active', '=', 1)->get();
+
+        $categories = Category::where('type', '=', 'outcome')->get();
+
+        $subcategories = Subcategory::where('category_id', '=', $outcome->category_id)->get();
+
+        $sellers = Seller::all();
+
+        return view('outcomes.edit', [
+            'outcome' => $outcome,
+            'accounts' => $accounts,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'sellers' => $sellers,
+        ]);
     }
 
     /**
@@ -101,6 +133,14 @@ class OutcomesController extends Controller
      */
     public function destroy(Outcome $outcome)
     {
-        //
+        $account = Account::find($outcome->account_id);
+
+        $account->total_sum = $account->total_sum + $outcome->total_sum;
+
+        $account->save();
+
+
+        $outcome->delete();
+        return back();
     }
 }

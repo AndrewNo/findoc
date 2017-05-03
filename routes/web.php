@@ -31,6 +31,14 @@ Route::post('income/update/{income}', 'IncomesController@update');
 
 Route::post('category/add', 'CategoriesController@store');
 
+Route::post('subcategory/add', 'SubcategoriesController@store');
+Route::post('subcategory/get', 'SubcategoriesController@getSubcategories');
+
 Route::post('payer/add', 'PayersController@store');
 
+Route::post('seller/add', 'SellersController@store');
+
 Route::get('outcomes', 'OutcomesController@index');
+Route::post('outcome/add', 'OutcomesController@store');
+Route::delete('outcome/destroy/{outcome}', 'OutcomesController@destroy');
+Route::get('outcome/{outcome}', 'OutcomesController@edit');
