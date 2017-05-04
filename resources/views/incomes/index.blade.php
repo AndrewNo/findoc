@@ -85,7 +85,7 @@
                             <div class="images">
                                 <ul>
                                     @foreach(glob('images/accounts_icons/*.png') as $img)
-                                        <li><img src="{{ $img }}" alt=""></li>
+                                        <li><img src="/{{ $img }}" alt=""></li>
                                     @endforeach
                                 </ul>
                             </div>

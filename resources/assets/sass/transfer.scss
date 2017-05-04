@@ -1,0 +1,54 @@
+.add_transfer {
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid silver;
+  border-radius: 3px;
+  background: linear-gradient(135deg, rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%);
+  cursor: pointer;
+  i {
+    vertical-align: middle;
+  }
+}
+
+.modal_bg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 0;
+  left: 0;
+  .modal_container {
+    width: 70%;
+    top: 50px;
+    left: 50%;
+    background-color: #fff;
+    position: absolute;
+    margin-left: -35%;
+    padding: 20px;
+    h3 {
+      color: #2ab27b;
+    }
+    button {
+      margin: 20px;
+      float: right;
+    }
+    form {
+      label[for="total_sum"] {
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+      input[type="submit"] {
+        display: block;
+        margin-top: 10px;
+      }
+      span {
+        margin: 0 10px;
+        font-size: 20px;
+        color: #2ab27b;
+      }
+    }
+  }
+}

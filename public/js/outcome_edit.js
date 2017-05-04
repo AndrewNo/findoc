@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 53);
+/******/ 	return __webpack_require__(__webpack_require__.s = 56);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -31603,133 +31603,221 @@ module.exports = function(module) {
 /* 32 */,
 /* 33 */,
 /* 34 */,
-/* 35 */
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(26);
 
-var modal_mask = document.querySelector('.modal-mask');
-var modal_catgory = document.querySelector('div.modal-catgory');
-var modal_payer = document.querySelector('div.modal-payer');
+/*Change currency*/
+document.getElementById('account_id').addEventListener('change', function () {
+    var currency = this.options[this.selectedIndex].dataset.currency;
 
-var add_category = document.querySelector('div.add_category');
-var add_payer = document.querySelector('div.add_payer');
+    document.querySelector('#total_sum + span').innerText = currency;
+    document.querySelector('input[name="currency"]').value = currency;
+});
 
-add_category.addEventListener('click', function () {
-    modal_mask.style.display = 'table';
-    modal_catgory.style.display = 'table';
-    modal_payer.style.display = 'none';
+/*Change subcategories according category*/
+document.getElementById('category_id').addEventListener('change', function () {
 
-    var add_img_button = document.querySelector('.modal-body .add_img');
+    document.getElementById('img_category').src = '/' + this.options[this.selectedIndex].dataset.img;
 
-    add_img_button.addEventListener('click', function () {
+    axios.post('/subcategory/get', {
+        category_id: this.value
+    }).then(function (response) {
+        document.getElementById('img_subcategory').src = '';
+        var subcategory_select = document.getElementById('subcategory_id');
+        subcategory_select.innerHTML = '';
+        var default_option = document.createElement('option');
+        default_option.innerText = "Choose subcategory";
+        default_option.setAttribute('selected', '');
+        default_option.setAttribute('disabled', '');
+        subcategory_select.appendChild(default_option);
 
-        var images_list = document.querySelector('.modal-body .images');
-
-        images_list.style.display = 'block';
-
-        var account_image = document.querySelectorAll('.modal-body .images ul li');
-        account_image.forEach(function (item) {
-            item.addEventListener('click', function () {
-                var img = document.createElement('img');
-                img.src = this.children[0].attributes[0].value;
-                img.style.width = '40px';
-
-                add_img_button.innerText = '';
-                add_img_button.appendChild(img);
-                document.querySelector('input[name="pic"]').value = this.children[0].attributes[0].value;
-                images_list.style.display = 'none';
-            });
-        });
-    });
-
-    window.addEventListener("keydown", function (e) {
-        if (e.keyCode == 27) {
-            modal_mask.style.display = 'none';
-        }
-    }, true);
-
-    document.querySelector('.modal-catgory .modal-default-button').addEventListener('click', function () {
-        modal_mask.style.display = 'none';
-    });
-
-    document.querySelector('.modal-catgory input[type="submit"]').addEventListener('click', function (e) {
-        e.preventDefault();
-        var title = document.querySelector('.modal-catgory input[name="category_title"]').value;
-        var pic = document.querySelector('.modal-catgory input[name="pic"]').value;
-        var type = document.querySelector('.modal-catgory input[name="type"]').value;
-
-        axios.post('/category/add', {
-            category_title: title,
-            category_pic: pic,
-            type: type
-        }).then(function (response) {
-            var select_category = document.getElementById('category_id');
+        response.data.forEach(function (item) {
             var option = document.createElement('option');
-            option.value = response.data.id;
-            option.innerText = response.data.title;
-            option.setAttribute('selected', '');
-            select_category.appendChild(option);
-
-            var img_category = document.getElementById('img_category');
-            img_category.src = response.data.pic;
-
-            modal_mask.style.display = 'none';
-        }).catch(function (error) {
-            console.log(error);
+            option.value = item.id;
+            option.innerText = item.title;
+            option.setAttribute('data-subimage', item.pic);
+            subcategory_select.appendChild(option);
         });
+    }).catch(function (error) {
+        console.log(error);
     });
 });
 
-add_payer.addEventListener('click', function () {
-    modal_mask.style.display = 'table';
-    modal_payer.style.display = 'table';
-    modal_catgory.style.display = 'none';
+/*Change img subcategory*/
+document.getElementById('subcategory_id').addEventListener('change', function () {
+    document.getElementById('img_subcategory').src = '/' + this.options[this.selectedIndex].dataset.subimage;
+});
 
-    window.addEventListener("keydown", function (e) {
-        if (e.keyCode == 27) {
-            modal_mask.style.display = 'none';
-        }
-    }, true);
+/*Add image show*/
+document.getElementById('add_image').addEventListener('click', function () {
+    document.querySelector('.add_new_category .images').style.display = 'block';
+});
 
-    document.querySelector('.modal-payer .modal-default-button').addEventListener('click', function () {
-        modal_mask.style.display = 'none';
-    });
-
-    document.querySelector('.modal-payer input[type="submit"]').addEventListener('click', function (e) {
-        e.preventDefault();
-        var title = document.querySelector('.modal-payer input[name="payer_title"]').value;
-
-        axios.post('/payer/add', {
-            payer_title: title
-        }).then(function (response) {
-            var select_payer = document.getElementById('payer_id');
-            var option = document.createElement('option');
-            option.value = response.data.id;
-            option.innerText = response.data.title;
-            option.setAttribute('selected', '');
-            select_payer.appendChild(option);
-
-            modal_mask.style.display = 'none';
-        }).catch(function (error) {
-            console.log(error);
-        });
+/*Add image in new category*/
+var category_images = document.querySelectorAll('.add_new_category .images ul li');
+category_images.forEach(function (item) {
+    item.addEventListener('click', function () {
+        document.getElementById('add_image').innerHTML = '<img src="' + this.children[0].attributes[0].value + '">';
+        document.querySelector('.add_new_category input[name="pic"]').value = this.children[0].attributes[0].value.substr(1);
+        document.querySelector('.add_new_category .images').style.display = 'none';
     });
 });
 
-var currency = document.getElementById('account');
+/*POST request for creating new category*/
+document.querySelector('.add_new_category input[type="submit"]').addEventListener('click', function (e) {
+    e.preventDefault();
+    var category_title = document.getElementById('new_category_title');
+    var category_pic = document.querySelector('.add_new_category input[name="pic"]');
+    axios.post('/category/add', {
+        category_title: category_title.value,
+        category_pic: category_pic.value,
+        type: document.querySelector('.add_new_category input[name="type"]').value
+    }).then(function (response) {
+        console.log(response);
+        category_title.value = '';
+        category_pic.value = '';
+        document.getElementById('add_image').innerText = 'Add image';
 
-currency.addEventListener('change', function () {
-    var currency_title = this.options[this.selectedIndex].dataset.currency;
+        var new_category = document.createElement('option');
+        new_category.value = response.data.id;
+        new_category.innerText = response.data.title;
+        new_category.setAttribute('selected', '');
+        new_category.setAttribute('data-img', response.data.pic);
+        document.getElementById('category_id').appendChild(new_category);
+        document.getElementById('img_category').src = '/' + response.data.pic;
 
-    document.querySelector('#total_sum + span').innerText = currency_title;
-    document.querySelector('input[name="currency"]').value = currency_title;
+        document.getElementById('img_subcategory').src = '';
+        var subcategory_select = document.getElementById('subcategory_id');
+        subcategory_select.innerHTML = '';
+        var default_option = document.createElement('option');
+        default_option.innerText = "Choose subcategory";
+        default_option.setAttribute('selected', '');
+        default_option.setAttribute('disabled', '');
+        subcategory_select.appendChild(default_option);
+
+        document.querySelector('.modal_bg').style.display = 'none';
+        document.querySelector('.modal_bg .add_new_category').style.display = 'none';
+    }).catch(function (error) {
+        console.log(error);
+    });
+});
+
+/*Show modal add category*/
+document.querySelector('.add_category').addEventListener('click', function () {
+    document.querySelector('.modal_bg').style.display = 'block';
+    document.querySelector('.modal_bg .add_new_category').style.display = 'block';
+});
+
+/*Exit from modal category*/
+document.getElementById('category_exit').addEventListener('click', function () {
+    document.getElementById('new_category_title').value = '';
+    document.querySelector('.add_new_category input[name="pic"]').value = '';
+    document.getElementById('add_image').innerText = 'Add image';
+    document.querySelector('.modal_bg').style.display = 'none';
+    document.querySelector('.modal_bg .add_new_category').style.display = 'none';
+});
+
+/*Add image show in subcategories*/
+document.getElementById('add_image_subcategory').addEventListener('click', function () {
+    document.querySelector('.add_new_subcategory .images').style.display = 'block';
+});
+
+/*Add image in new subcategory*/
+var subcategory_images = document.querySelectorAll('.add_new_subcategory .images ul li');
+subcategory_images.forEach(function (item) {
+    item.addEventListener('click', function () {
+        document.getElementById('add_image_subcategory').innerHTML = '<img src="' + this.children[0].attributes[0].value + '">';
+        document.querySelector('.add_new_subcategory input[name="pic"]').value = this.children[0].attributes[0].value.substr(1);
+        document.querySelector('.add_new_subcategory .images').style.display = 'none';
+    });
+});
+
+/*POST request for creating new subcategory*/
+document.querySelector('.add_new_subcategory input[type="submit"]').addEventListener('click', function (e) {
+    e.preventDefault();
+    var subcategory_title = document.getElementById('new_subcategory_title');
+    var subcategory_pic = document.querySelector('.add_new_subcategory input[name="pic"]');
+    var category_id = document.getElementById('category_id').value;
+    axios.post('/subcategory/add', {
+        subcategory_title: subcategory_title.value,
+        subcategory_pic: subcategory_pic.value,
+        category_id: category_id
+    }).then(function (response) {
+        console.log(response);
+        subcategory_title.value = '';
+        subcategory_pic.value = '';
+        document.getElementById('add_image').innerText = 'Add image';
+
+        var new_subcategory = document.createElement('option');
+        new_subcategory.value = response.data.id;
+        new_subcategory.innerText = response.data.title;
+        new_subcategory.setAttribute('selected', '');
+        new_subcategory.setAttribute('data-img', response.data.pic);
+        document.getElementById('subcategory_id').appendChild(new_subcategory);
+        document.getElementById('img_subcategory').src = '/' + response.data.pic;
+
+        document.querySelector('.modal_bg').style.display = 'none';
+        document.querySelector('.modal_bg .add_new_category').style.display = 'none';
+    }).catch(function (error) {
+        console.log(error);
+    });
+});
+
+/*Show modal add subcategory*/
+document.querySelector('.add_subcategory').addEventListener('click', function () {
+    document.querySelector('.modal_bg').style.display = 'block';
+    document.querySelector('.modal_bg .add_new_subcategory').style.display = 'block';
+});
+
+/*Exit from modal subcategory*/
+document.getElementById('subcategory_exit').addEventListener('click', function () {
+    document.getElementById('new_subcategory_title').value = '';
+    document.querySelector('.add_new_subcategory input[name="pic"]').value = '';
+    document.getElementById('add_image_subcategory').innerText = 'Add image';
+    document.querySelector('.modal_bg').style.display = 'none';
+    document.querySelector('.modal_bg .add_new_subcategory').style.display = 'none';
+});
+
+/*Show modal add seller*/
+document.querySelector('.add_seller').addEventListener('click', function () {
+    document.querySelector('.modal_bg').style.display = 'block';
+    document.querySelector('.modal_bg .add_new_seller').style.display = 'block';
+});
+
+/*Exit from modal seller*/
+document.getElementById('seller_exit').addEventListener('click', function () {
+    document.getElementById('new_seller_title').value = '';
+    document.querySelector('.modal_bg').style.display = 'none';
+    document.querySelector('.modal_bg .add_new_seller').style.display = 'none';
+});
+
+/*POST request for creating new seller*/
+document.querySelector('.add_new_seller input[type="submit"]').addEventListener('click', function (e) {
+    e.preventDefault();
+    var seller_title = document.getElementById('new_seller_title');
+    axios.post('/seller/add', {
+        seller_title: seller_title.value
+    }).then(function (response) {
+        seller_title.value = '';
+        var new_seller = document.createElement('option');
+        new_seller.value = response.data.id;
+        new_seller.innerText = response.data.title;
+        new_seller.setAttribute('selected', '');
+        document.getElementById('seller_id').appendChild(new_seller);
+
+        document.querySelector('.modal_bg').style.display = 'none';
+        document.querySelector('.modal_bg .add_new_category').style.display = 'none';
+    }).catch(function (error) {
+        console.log(error);
+    });
 });
 
 /***/ }),
-/* 36 */,
-/* 37 */,
-/* 38 */,
 /* 39 */,
 /* 40 */,
 /* 41 */,
@@ -31744,10 +31832,13 @@ currency.addEventListener('change', function () {
 /* 50 */,
 /* 51 */,
 /* 52 */,
-/* 53 */
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(35);
+module.exports = __webpack_require__(38);
 
 
 /***/ })

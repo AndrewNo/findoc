@@ -1,0 +1,83 @@
+form {
+  margin-top: 50px;
+  label, input, select, textarea {
+    display: block;
+    margin: 5px 0;
+  }
+  .subcategory_block {
+    display: inline-block;
+    .add_subcategory, label, select {
+      display: inline-block;
+    }
+  }
+  .add_seller, #seller_id {
+    display: inline-block;
+  }
+
+  .add_subcategory, .add_category, .add_seller {
+    padding: 5px;
+    border: 1px solid silver;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(130,130,130,1) 0%,rgba(139,139,139,1) 12%,rgba(148,148,148,1) 25%,rgba(126,126,126,1) 39%,rgba(96,96,96,1) 91%,rgba(88,88,88,1) 94%,rgba(88,88,88,1) 94%,rgba(107,107,107,1) 100%,rgba(77,77,77,1) 100%,rgba(90,90,90,1) 100%);
+    cursor: pointer;
+  }
+  img {
+    width: 50px;
+    vertical-align: middle;
+  }
+}
+
+.modal_bg {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0, 0.2);
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: none;
+  .modal_container {
+    width: 70%;
+    background-color: #fff;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    margin-left: -35%;
+    .add_new_category, .add_new_subcategory, .add_new_seller {
+      padding: 10px;
+      display: none;
+      h3 {
+        color: #2ab27b;
+      }
+      #add_image, #add_image_subcategory {
+        display: inline-block;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid silver;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .images {
+        display: none;
+        ul{
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          li {
+            display: inline-block;
+            img {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      button {
+        float: right;
+        margin: 20px;
+      }
+    }
+  }
+}
+

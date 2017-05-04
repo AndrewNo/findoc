@@ -122,7 +122,45 @@ class OutcomesController extends Controller
      */
     public function update(Request $request, Outcome $outcome)
     {
-        //
+
+
+        if ($outcome->account_id == $request->account_id) {
+            $account = Account::find($outcome->account_id);
+
+
+            $account->total_sum = ($account->total_sum + $outcome->total_sum) - $request->total_sum;
+
+            $account->save();
+        } else {
+
+
+            $account = Account::find($request->account_id);
+            $account->total_sum = $account->total_sum - $request->total_sum;
+            $account->save();
+
+            if ($outcome->total_sum != $account->total_sum) {
+                $prev_account = Account::find($outcome->account_id);
+                $prev_account->total_sum = $prev_account->total_sum + $outcome->total_sum;
+                $prev_account->save();
+            } else {
+                $prev_account = Account::find($outcome->account_id);
+                $prev_account->total_sum = $prev_account->total_sum + $request->total_sum;
+                $prev_account->save();
+            }
+
+        }
+
+        $outcome->category_id = $request->category_id;
+        $outcome->subcategory_id = $request->subcategory_id;
+        $outcome->account_id = $request->account_id;
+        $outcome->seller_id = $request->seller_id;
+        $outcome->total_sum = $request->total_sum;
+        $outcome->currency = $request->currency;
+        $outcome->comment = $request->comment;
+        $outcome->save();
+
+        return redirect('outcomes');
+
     }
 
     /**

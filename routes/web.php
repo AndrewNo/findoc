@@ -42,3 +42,6 @@ Route::get('outcomes', 'OutcomesController@index');
 Route::post('outcome/add', 'OutcomesController@store');
 Route::delete('outcome/destroy/{outcome}', 'OutcomesController@destroy');
 Route::get('outcome/{outcome}', 'OutcomesController@edit');
+Route::post('outcome/update/{outcome}', 'OutcomesController@update');
+
+Route::get('transfers', 'TransfersController@index');
