@@ -10,6 +10,7 @@
   "/js/outcome_add.js": "/js/outcome_add.js",
   "/js/income_edit.js": "/js/income_edit.js",
   "/js/income_add.js": "/js/income_add.js",
+  "/js/transfer.js": "/js/transfer.js",
   "/js/main.js": "/js/main.js",
   "/js/edit.js": "/js/edit.js"
 }
