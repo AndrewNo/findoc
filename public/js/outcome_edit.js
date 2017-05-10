@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 57);
+/******/ 	return __webpack_require__(__webpack_require__.s = 65);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -31606,7 +31606,9 @@ module.exports = function(module) {
 /* 35 */,
 /* 36 */,
 /* 37 */,
-/* 38 */
+/* 38 */,
+/* 39 */,
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(26);
@@ -31818,8 +31820,6 @@ document.querySelector('.add_new_seller input[type="submit"]').addEventListener(
 });
 
 /***/ }),
-/* 39 */,
-/* 40 */,
 /* 41 */,
 /* 42 */,
 /* 43 */,
@@ -31836,10 +31836,18 @@ document.querySelector('.add_new_seller input[type="submit"]').addEventListener(
 /* 54 */,
 /* 55 */,
 /* 56 */,
-/* 57 */
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(38);
+module.exports = __webpack_require__(40);
 
 
 /***/ })

@@ -1,0 +1,48 @@
+.modal_bg {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  .modal_agent {
+    background-color: #fff;
+    width: 50%;
+    padding: 20px;
+    top: 50px;
+    position: absolute;
+    left: 50%;
+    margin-left: -25%;
+    h3 {
+      color: #2ab27b;
+    }
+    #modal_agent_exit {
+      margin: 20px;
+      float: right;
+    }
+  }
+}
+
+.add_agent {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid silver;
+  border-radius: 5px;
+}
+
+form {
+  label, input, select, textarea {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  #agent {
+    display: inline-block;
+  }
+
+  input[type="submit"] {
+    margin-top: 20px;
+  }
+}

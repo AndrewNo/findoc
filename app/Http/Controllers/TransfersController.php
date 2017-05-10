@@ -82,7 +82,7 @@ class TransfersController extends Controller
      */
     public function edit(Transfer $transfer)
     {
-        $accounts = Account::where('is_active', '=', 1);
+        $accounts = Account::where('is_active', '=', 1)->get();
 
         return view('transfers.edit', [
             'transfer' => $transfer,
@@ -99,7 +99,48 @@ class TransfersController extends Controller
      */
     public function update(Request $request, Transfer $transfer)
     {
-        //
+
+        if ($request->account_from != $transfer->account_from) {
+            $account = Account::find($transfer->account_from);
+            $account->total_sum = $account->total_sum + $transfer->total_sum;
+            $account->save();
+
+            $account_from = Account::find($request->account_from);
+            $account_from->total_sum = $account_from->total_sum - $request->total_sum;
+            $account_from->save();
+        }
+
+        if ($request->account_to != $transfer->account_to) {
+            $account = Account::find($transfer->account_to);
+            $account->total_sum = $account->total_sum - $transfer->total_sum;
+            $account->save();
+
+            $account_to = Account::find($request->account_to);
+            $account_to->total_sum = $account_to->total_sum + $request->total_sum;
+            $account_to->save();
+        }
+
+        if ($request->account_to == $transfer->account_to && $request->account_from == $transfer->account_from) {
+            $account_from = Account::find($request->account_from);
+            $account_from->total_sum = $account_from->total_sum + $transfer->total_sum;
+            $account_from->total_sum = $account_from->total_sum - $request->total_sum;
+            $account_from->save();
+
+            $account_to = Account::find($request->account_to);
+            $account_to->total_sum = $account_to->total_sum - $transfer->total_sum;
+            $account_to->total_sum = $account_to->total_sum + $request->total_sum;
+            $account_to->save();
+        }
+
+        $transfer->account_from = $request->account_from;
+        $transfer->account_to = $request->account_to;
+        $transfer->total_sum = $request->total_sum;
+        $transfer->currency = $request->currency;
+
+        $transfer->save();
+
+        return redirect('/transfers');
+
     }
 
     /**

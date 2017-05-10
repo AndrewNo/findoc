@@ -21,6 +21,8 @@
                         href="/incomes">Income</a></li>
             <li @if(\Illuminate\Support\Facades\Request::is('outcomes')) class="active" @endif><a href="/outcomes">Outcome</a></li>
             <li @if(\Illuminate\Support\Facades\Request::is('transfers')) class="active" @endif><a href="/transfers">Transfers</a></li>
+            <li @if(\Illuminate\Support\Facades\Request::is('debts')) class="active" @endif><a
+                        href="/debts">Debts</a></li>
         </ul>
     </div>
 </header>

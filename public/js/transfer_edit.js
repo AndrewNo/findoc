@@ -63,15 +63,31 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 66);
+/******/ 	return __webpack_require__(__webpack_require__.s = 67);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 41:
+/***/ 42:
 /***/ (function(module, exports) {
 
-/*Disactive one of accounts*/
+/*Refresh page*/
+document.querySelector('form .refresh').addEventListener('click', function () {
+    location.reload();
+});
+
+document.querySelectorAll('form #account_to option').forEach(function (item) {
+    if (item.value == document.getElementById('account_from').value) {
+        item.setAttribute('disabled', '');
+    }
+});
+
+document.querySelectorAll('form #account_from option').forEach(function (item) {
+    if (item.value == document.getElementById('account_to').value) {
+        item.setAttribute('disabled', '');
+    }
+});
+
 document.getElementById('account_from').addEventListener('change', function () {
     var account_from_value = this.value;
     var currency = this.options[this.selectedIndex].dataset.currency;
@@ -95,7 +111,6 @@ document.getElementById('account_from').addEventListener('change', function () {
         document.querySelector('span.currency_from').style.color = '#2ab27b';
         document.querySelector('span.currency_to').style.color = '#2ab27b';
         document.querySelector('.warning').style.display = 'none';
-        document.querySelector('form input[name="currency"]').value = document.querySelector('span.currency_from').innerText;
     }
 });
 
@@ -119,83 +134,16 @@ document.getElementById('account_to').addEventListener('change', function () {
         document.querySelector('span.currency_from').style.color = '#2ab27b';
         document.querySelector('span.currency_to').style.color = '#2ab27b';
         document.querySelector('.warning').style.display = 'none';
-        document.querySelector('form input[name="currency"]').value = document.querySelector('span.currency_from').innerText;
+        document.querySelector('form input[name="currency"]').value = document.querySelector('span.currency_to').innerText;
     }
-});
-
-/*Refresh selects accounts*/
-document.querySelector('span.refresh').addEventListener('click', function () {
-
-    document.getElementById('account_from').value = '';
-    document.getElementById('account_to').value = '';
-    document.querySelector('span.currency_from').innerText = '';
-    document.querySelector('span.currency_to').innerText = '';
-    document.querySelector('.warning').style.display = 'none';
-
-    document.querySelectorAll('#account_from option').forEach(function (item) {
-        if (item.value == '') {
-            item.setAttribute('disabled', '');
-            item.setAttribute('selected', '');
-        } else {
-            item.removeAttribute('disabled');
-            item.removeAttribute('selected');
-        }
-    });
-
-    document.querySelectorAll('#account_to option').forEach(function (item) {
-        if (item.value == '') {
-            item.setAttribute('disabled', '');
-            item.setAttribute('selected', '');
-        } else {
-            item.removeAttribute('disabled');
-            item.removeAttribute('selected');
-        }
-    });
-});
-
-/*Show modal*/
-document.querySelector('.add_transfer').addEventListener('click', function () {
-    document.querySelector('.modal_bg').style.display = 'block';
-});
-
-/*Close modal*/
-document.getElementById('exit_modal').addEventListener('click', function () {
-    document.querySelector('.modal_bg').style.display = 'none';
-    document.getElementById('account_from').value = '';
-    document.getElementById('account_to').value = '';
-    document.querySelector('.warning').style.display = 'none';
-    document.querySelector('span.currency_from').innerText = '';
-    document.querySelector('span.currency_to').innerText = '';
-
-    document.querySelectorAll('#account_from option').forEach(function (item) {
-        if (item.value == '') {
-            item.setAttribute('disabled', '');
-            item.setAttribute('selected', '');
-        } else {
-            item.removeAttribute('disabled');
-            item.removeAttribute('selected');
-        }
-    });
-
-    document.querySelectorAll('#account_to option').forEach(function (item) {
-        if (item.value == '') {
-            item.setAttribute('disabled', '');
-            item.setAttribute('selected', '');
-        } else {
-            item.removeAttribute('disabled');
-            item.removeAttribute('selected');
-        }
-    });
-
-    document.getElementById('total_sum').value = '';
 });
 
 /***/ }),
 
-/***/ 66:
+/***/ 67:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(41);
+module.exports = __webpack_require__(42);
 
 
 /***/ })

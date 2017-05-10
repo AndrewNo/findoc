@@ -1,0 +1,28 @@
+form {
+  span {
+    margin: 0 5px;
+    color: #2ab27b;
+    font-size: 20px;
+  }
+  label[for="total_sum"], input[name="total_sum"] {
+    margin-top: 10px;
+    display: block;
+  }
+  input[type="submit"] {
+    display: block;
+    margin-top: 10px;
+  }
+  .warning {
+    margin-top: 10px;
+    width: 30%;
+    border-radius: 5px;
+    border: 1px solid red;
+    background-color: rgba(255, 0, 0, 0.4);
+    padding: 20px;
+    text-align: center;
+    display: none;
+  }
+  .refresh {
+    cursor: pointer;
+  }
+}

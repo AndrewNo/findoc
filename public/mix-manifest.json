@@ -2,6 +2,9 @@
   "/js/app.js": "/js/app.js",
   "/css/app.css": "/css/app.css",
   "/css/transfer.css": "/css/transfer.css",
+  "/css/transfer_edit.css": "/css/transfer_edit.css",
+  "/css/debts.css": "/css/debts.css",
+  "/css/debt_edit.css": "/css/debt_edit.css",
   "/css/outcomes.css": "/css/outcomes.css",
   "/css/outcomes_edit.css": "/css/outcomes_edit.css",
   "/css/income_edit.css": "/css/income_edit.css",
@@ -10,7 +13,10 @@
   "/js/outcome_add.js": "/js/outcome_add.js",
   "/js/income_edit.js": "/js/income_edit.js",
   "/js/income_add.js": "/js/income_add.js",
+  "/js/debt.js": "/js/debt.js",
+  "/js/transfer_edit.js": "/js/transfer_edit.js",
   "/js/transfer.js": "/js/transfer.js",
   "/js/main.js": "/js/main.js",
-  "/js/edit.js": "/js/edit.js"
+  "/js/edit.js": "/js/edit.js",
+  "/js/debt_edit.js": "/js/debt_edit.js"
 }

@@ -48,3 +48,11 @@ Route::get('transfers', 'TransfersController@index');
 Route::post('transfer/add', 'TransfersController@store');
 Route::delete('transfer/destroy/{transfer}', 'TransfersController@destroy');
 Route::get('transfer/{transfer}', 'TransfersController@edit');
+Route::post('transfer/update/{transfer}', 'TransfersController@update');
+
+Route::get('debts', 'DebtsController@index');
+Route::post('debt/add', 'DebtsController@store');
+Route::delete('debt/destroy/{debt}', 'DebtsController@destroy');
+Route::get('debt/{debt}', 'DebtsController@edit');
+
+Route::post('agent/add', 'AgentsController@store');
