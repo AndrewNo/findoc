@@ -42,6 +42,21 @@ header {
       color: rgba(0, 0, 0, 0.6);
     }
   }
+  li.dropdown {
+    position: relative;
+    .submenu {
+      position: absolute;
+      left: -75%;
+      display: none;
+      li {
+        display: block;
+        background-color: #5e5d5d;
+      }
+    }
+    &:hover .submenu {
+      display: block;
+    }
+  }
 }
 
 .active_accounts {

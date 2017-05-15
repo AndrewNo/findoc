@@ -23,6 +23,17 @@
             <li @if(\Illuminate\Support\Facades\Request::is('transfers')) class="active" @endif><a href="/transfers">Transfers</a></li>
             <li @if(\Illuminate\Support\Facades\Request::is('debts')) class="active" @endif><a
                         href="/debts">Debts</a></li>
+            <li class="dropdown">
+                <a href="">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/categories">Categories</a></li>
+                    <li><a href="/subcategories">Subcategories</a></li>
+                    <li><a href="/sellers">Sellers</a></li>
+                    <li><a href="/payers">Payers</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </header>

@@ -54,5 +54,10 @@ Route::get('debts', 'DebtsController@index');
 Route::post('debt/add', 'DebtsController@store');
 Route::delete('debt/destroy/{debt}', 'DebtsController@destroy');
 Route::get('debt/{debt}', 'DebtsController@edit');
+Route::post('debt/update/{debt}', 'DebtsController@update');
 
 Route::post('agent/add', 'AgentsController@store');
+
+Route::get('categories', 'CategoriesController@index');
+Route::delete('category/destroy/{category}', 'CategoriesController@destroy');
+Route::get('category/{category}', 'CategoriesController@edit');

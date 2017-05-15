@@ -32,7 +32,7 @@
                         @endforeach
                     </select>
                     <div class="add_category" title="New category">
-                        <img src="" alt="" id="img_category">
+                        <img src="https://cdn.pixabay.com/photo/2015/11/03/09/03/question-mark-1019993_960_720.jpg" alt="" id="img_category">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
                     <div class="subcategory_block">
@@ -41,7 +41,7 @@
                             <option value="" disabled selected>Choose subcategory</option>
                         </select>
                         <div class="add_subcategory" title="New subcategory">
-                            <img src="" alt="" id="img_subcategory">
+                            <img src="https://cdn.pixabay.com/photo/2015/11/03/09/03/question-mark-1019993_960_720.jpg" alt="" id="img_subcategory">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </div>
                     </div>

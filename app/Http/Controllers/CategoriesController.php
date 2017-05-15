@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,12 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+
+        $categories = Category::all();
+
+        return view('categories.index', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -70,7 +76,7 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', ['category' => $category]);
     }
 
     /**
@@ -93,6 +99,13 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $subCategories = Subcategory::where('category_id', '=', $category->id)->get();
+        foreach ($subCategories as $subCategory) {
+            $subCategory->delete();
+        }
+
+        $category->delete();
+
+        return back();
     }
 }

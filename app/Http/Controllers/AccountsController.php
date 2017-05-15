@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Debt;
+use App\Models\Income;
+use App\Models\Outcome;
+use App\Models\Transfer;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -114,6 +118,24 @@ class AccountsController extends Controller
      */
     public function destroy(Account $account)
     {
+
+        $incomes = Income::where('account_id', '=', $account->id)->get();
+        foreach ($incomes as $income) {
+            $income->delete();
+        }
+        $outcomes = Outcome::where('account_id', '=', $account->id)->get();
+        foreach ($outcomes as $outcome) {
+            $outcome->delete();
+        }
+        $transfers = Transfer::where('account_to', '=', $account->id)->get();
+        foreach ($transfers as $transfer) {
+            $transfer->delete();
+        }
+        $debts = Debt::where('account_id', '=', $account->id)->get();
+        foreach ($debts as $debt) {
+            $debt->delete();
+        }
+
         $account->delete();
 
         return back();

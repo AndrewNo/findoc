@@ -7,7 +7,7 @@
 @section('content')
 
     <h3>Edit debt</h3>
-    <form action="debt/update/{{ $debt->id }}" method="post">
+    <form action="/debt/update/{{ $debt->id }}" method="post">
         <label for="account">Account:</label>
         <select name="account_id" id="account">
             <option value="" selected disabled>Choose account</option>

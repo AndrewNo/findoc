@@ -108,7 +108,49 @@ class DebtsController extends Controller
      */
     public function update(Request $request, Debt $debt)
     {
-        //
+
+
+        if ($request->type == 'credit') {
+            if ($request->account_id != $debt->account_id) {
+                $prev_account = Account::find($debt->account_id);
+                $prev_account->total_sum = $prev_account->total_sum + $debt->total_sum;
+                $prev_account->save();
+
+                $curr_account = Account::find($request->account_id);
+                $curr_account->total_sum = $curr_account->total_sum - $request->total_sum;
+                $curr_account->save();
+            } else {
+                $curr_account = Account::find($request->account_id);
+                $curr_account->total_sum = $curr_account->total_sum - $request->total_sum;
+                $curr_account->save();
+            }
+        }else {
+            if ($request->account_id != $debt->account_id) {
+                $prev_account = Account::find($debt->account_id);
+                $prev_account->total_sum = $prev_account->total_sum - $debt->total_sum;
+                $prev_account->save();
+
+                $curr_account = Account::find($request->account_id);
+                $curr_account->total_sum = $curr_account->total_sum + $request->total_sum;
+                $curr_account->save();
+            } else {
+                $curr_account = Account::find($request->account_id);
+                $curr_account->total_sum = $curr_account->total_sum  + $request->total_sum;
+                $curr_account->save();
+            }
+        }
+
+        $debt->account_id = $request->account_id;
+        $debt->total_sum = $request->total_sum;
+        $debt->type = $request->type;
+        $debt->currency = $request->currency;
+        $debt->agent_id = $request->agent_id;
+        $debt->comment = $request->comment;
+
+        $debt->save();
+
+        return redirect('debts');
+
     }
 
     /**
