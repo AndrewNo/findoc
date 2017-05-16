@@ -86,7 +86,8 @@ class SubcategoriesController extends Controller
      */
     public function update(Request $request, Subcategory $subcategory)
     {
-        $subcategory->title = $request->title;
+
+        $subcategory->title = $request->subcategory_title;
         $subcategory->pic = $request->pic;
         $subcategory->category_id = $request->category_id;
         $subcategory->save();

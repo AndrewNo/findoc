@@ -90,7 +90,9 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->title = $request->title;
+
+
+        $category->title = $request->category_title;
         $category->pic = $request->pic;
         $category->type = $request->type;
 
