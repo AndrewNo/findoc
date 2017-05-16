@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 67);
+/******/ 	return __webpack_require__(__webpack_require__.s = 73);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 42:
+/***/ 44:
 /***/ (function(module, exports) {
 
 /*Refresh page*/
@@ -140,10 +140,10 @@ document.getElementById('account_to').addEventListener('change', function () {
 
 /***/ }),
 
-/***/ 67:
+/***/ 73:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(42);
+module.exports = __webpack_require__(44);
 
 
 /***/ })

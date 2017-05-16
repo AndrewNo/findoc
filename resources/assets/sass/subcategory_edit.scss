@@ -1,0 +1,31 @@
+form {
+  input, label, select {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  img {
+    width: 60px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .add_img {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid silver;
+    cursor: pointer;
+  }
+  .images{
+    display: none;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        display: inline-block;
+        cursor: pointer;
+      }
+    }
+  }
+}

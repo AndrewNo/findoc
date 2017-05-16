@@ -61,3 +61,9 @@ Route::post('agent/add', 'AgentsController@store');
 Route::get('categories', 'CategoriesController@index');
 Route::delete('category/destroy/{category}', 'CategoriesController@destroy');
 Route::get('category/{category}', 'CategoriesController@edit');
+Route::post('category/update/{category}', 'CategoriesController@update');
+
+Route::get('subcategories', 'SubcategoriesController@index');
+Route::delete('subcategory/destroy/{subcategory}', 'SubcategoriesController@destroy');
+Route::get('subcategory/{subcategory}', 'SubcategoriesController@edit');
+Route::post('subcategory/update/{subcategory}', 'SubcategoriesController@update');

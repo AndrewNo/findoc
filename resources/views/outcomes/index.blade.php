@@ -144,8 +144,9 @@
                     <td><img src="{{ asset($outcome->category->pic) }}" alt="">
                         {{ $outcome->category->title }} ->
                     </td>
-                    <td><img src="{{ asset($outcome->subcategory->pic) }}" alt="">
+                    <td>@if($outcome->subcategory_id != null)<img src="{{ asset($outcome->subcategory->pic) }}" alt="">
                         {{ $outcome->subcategory->title }}
+                            @endif
                     </td>
                     <td>{{ $outcome->category->title }}</td>
                     <td class="account_sum">

@@ -31,19 +31,23 @@
             <img src="{{ asset($outcome->category->pic) }}" alt="" id="img_category">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </div>
+
         <div class="subcategory_block">
             <label for="subcategory_id">Subcategory:</label>
             <select name="subcategory_id" id="subcategory_id">
                 <option value="" disabled selected>Choose subcategory</option>
-                @foreach($subcategories as $subcategory)
-                    <option value="{{ $subcategory->id }}" data-img="{{ $subcategory->pic }}"
-                            @if($subcategory->id == $outcome->subcategory_id) selected @endif >{{
+
+                    @foreach($subcategories as $subcategory)
+                        <option value="{{ $subcategory->id }}" data-img="{{ $subcategory->pic }}"
+                                @if($subcategory->id == $outcome->subcategory_id) selected @endif >{{
                 $subcategory->title
                             }}</option>
-                @endforeach
+                    @endforeach
+
             </select>
             <div class="add_subcategory" title="New subcategory">
-                <img src="{{ asset($outcome->subcategory->pic) }}" alt="" id="img_subcategory">
+                <img @if($category->subcategory_id != null)src="{{ asset($outcome->subcategory->pic) }}" @endif alt=""
+                     id="img_subcategory">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </div>
         </div>

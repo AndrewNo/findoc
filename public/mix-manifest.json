@@ -5,6 +5,8 @@
   "/css/transfer_edit.css": "/css/transfer_edit.css",
   "/css/debts.css": "/css/debts.css",
   "/css/debt_edit.css": "/css/debt_edit.css",
+  "/css/category_edit.css": "/css/category_edit.css",
+  "/css/subcategory_edit.css": "/css/subcategory_edit.css",
   "/css/outcomes.css": "/css/outcomes.css",
   "/css/outcomes_edit.css": "/css/outcomes_edit.css",
   "/css/income_edit.css": "/css/income_edit.css",
@@ -17,6 +19,8 @@
   "/js/debt.js": "/js/debt.js",
   "/js/transfer_edit.js": "/js/transfer_edit.js",
   "/js/transfer.js": "/js/transfer.js",
+  "/js/subcategory_edit.js": "/js/subcategory_edit.js",
   "/js/main.js": "/js/main.js",
-  "/js/edit.js": "/js/edit.js"
+  "/js/edit.js": "/js/edit.js",
+  "/js/category_edit.js": "/js/category_edit.js"
 }

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 62);
+/******/ 	return __webpack_require__(__webpack_require__.s = 67);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -31605,7 +31605,8 @@ module.exports = function(module) {
 /* 34 */,
 /* 35 */,
 /* 36 */,
-/* 37 */
+/* 37 */,
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(26);
@@ -31729,7 +31730,6 @@ currency.addEventListener('change', function () {
 });
 
 /***/ }),
-/* 38 */,
 /* 39 */,
 /* 40 */,
 /* 41 */,
@@ -31753,10 +31753,15 @@ currency.addEventListener('change', function () {
 /* 59 */,
 /* 60 */,
 /* 61 */,
-/* 62 */
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(37);
+module.exports = __webpack_require__(38);
 
 
 /***/ })

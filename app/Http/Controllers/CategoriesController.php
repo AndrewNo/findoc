@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Subcategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -46,7 +47,8 @@ class CategoriesController extends Controller
         $id = DB::table('categories')->insertGetId(array(
             'title' => $request->category_title,
             'pic' => $request->category_pic,
-            'type' => $request->type
+            'type' => $request->type,
+
         ));
 
         $category = Category::find($id);
@@ -88,7 +90,14 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->title = $request->title;
+        $category->pic = $request->pic;
+        $category->type = $request->type;
+
+
+        $category->save();
+
+        return redirect('/categories');
     }
 
     /**
