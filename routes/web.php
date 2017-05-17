@@ -67,3 +67,18 @@ Route::get('subcategories', 'SubcategoriesController@index');
 Route::delete('subcategory/destroy/{subcategory}', 'SubcategoriesController@destroy');
 Route::get('subcategory/{subcategory}', 'SubcategoriesController@edit');
 Route::post('subcategory/update/{subcategory}', 'SubcategoriesController@update');
+
+Route::get('sellers', 'SellersController@index');
+Route::delete('seller/destroy/{seller}', 'SellersController@destroy');
+Route::get('seller/{seller}', 'SellersController@edit');
+Route::post('seller/update/{seller}', 'SellersController@update');
+
+Route::get('payers', 'PayersController@index');
+Route::delete('payer/destroy/{payer}', 'PayersController@destroy');
+Route::get('payer/{payer}', 'PayersController@edit');
+Route::post('payer/update/{payer}', 'PayersController@update');
+
+Route::get('agents', 'AgentsController@index');
+Route::delete('agent/destroy/{agent}', 'AgentsController@destroy');
+Route::get('agent/{agent}', 'AgentsController@edit');
+Route::post('agent/update/{agent}', 'AgentsController@update');

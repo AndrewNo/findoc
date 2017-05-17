@@ -17,7 +17,8 @@
                 <select name="account_id" id="account">
                     <option value="" selected disabled>Choose account</option>
                     @foreach($accounts as $account)
-                        <option value="{{ $account->id }} " data-currency = "{{ $account->currency }}">{{ $account->title }}</option>
+                        <option value="{{ $account->id }} "
+                                data-currency="{{ $account->currency }}">{{ $account->title }}</option>
                     @endforeach
                 </select>
                 <label for="total_sum">Sum:</label>
@@ -82,7 +83,11 @@
                             {{ $debt->total_sum }}
                         </td>
                         <td>{{ $debt->currency }}</td>
-                        <td>{{ $debt->agent->title }}</td>
+                        <td>
+                            @if($debt->agent_id != null)
+                                {{ $debt->agent->title }}
+                            @endif
+                        </td>
                         <td>{{ $debt->comment }}</td>
                         <td class="edit">
                             <button><a href="debt/{{ $debt->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -115,31 +120,34 @@
                     <th>Delete</th>
                 </tr>
             @endif
-                @foreach($debts as $debt)
-                    @if($debt->type == 'debit')
-                        <tr>
+            @foreach($debts as $debt)
+                @if($debt->type == 'debit')
+                    <tr>
 
-                            <td>{{ $debt->account->title }}</td>
-                            <td class="account_sum">
-                                {{ $debt->total_sum }}
-                            </td>
-                            <td>{{ $debt->currency }}</td>
-                            <td>{{ $debt->agent->title }}</td>
-                            <td>{{ $debt->comment }}</td>
-                            <td class="edit">
-                                <button><a href="debt/{{ $debt->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                </button>
-                            </td>
-                            <td class="delete">
-                                <form action="/debt/destroy/{{ $debt->id }}" method="post">
-                                    {{ csrf_field() }}
-                                    {{ method_field('delete') }}
-                                    <button type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
+                        <td>{{ $debt->account->title }}</td>
+                        <td class="account_sum">
+                            {{ $debt->total_sum }}
+                        </td>
+                        <td>{{ $debt->currency }}</td>
+                        <td>
+                            @if($debt->agent_id != null)
+                                {{ $debt->agent->title }}
+                            @endif</td>
+                        <td>{{ $debt->comment }}</td>
+                        <td class="edit">
+                            <button><a href="debt/{{ $debt->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            </button>
+                        </td>
+                        <td class="delete">
+                            <form action="/debt/destroy/{{ $debt->id }}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('delete') }}
+                                <button type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
         </table>
     </div>
     <script src="{{ asset('js/debt.js') }}"></script>

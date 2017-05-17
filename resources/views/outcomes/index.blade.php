@@ -17,7 +17,8 @@
                     <select name="account_id" id="account_id">
                         <option value="" disabled selected>Choose account</option>
                         @foreach($accounts as $account)
-                            <option value="{{ $account->id }}" data-currency = "{{ $account->currency }}">{{ $account->title }}</option>
+                            <option value="{{ $account->id }}"
+                                    data-currency="{{ $account->currency }}">{{ $account->title }}</option>
                         @endforeach
                     </select>
                     <label for="total_sum">Sum:</label>
@@ -27,12 +28,13 @@
                     <select name="category_id" id="category_id">
                         <option value="" disabled selected>Choose category</option>
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" data-img = "{{ $category->pic }}">{{ $category->title
+                            <option value="{{ $category->id }}" data-img="{{ $category->pic }}">{{ $category->title
                             }}</option>
                         @endforeach
                     </select>
                     <div class="add_category" title="New category">
-                        <img src="https://cdn.pixabay.com/photo/2015/11/03/09/03/question-mark-1019993_960_720.jpg" alt="" id="img_category">
+                        <img src="https://cdn.pixabay.com/photo/2015/11/03/09/03/question-mark-1019993_960_720.jpg"
+                             alt="" id="img_category">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
                     <div class="subcategory_block">
@@ -41,7 +43,8 @@
                             <option value="" disabled selected>Choose subcategory</option>
                         </select>
                         <div class="add_subcategory" title="New subcategory">
-                            <img src="https://cdn.pixabay.com/photo/2015/11/03/09/03/question-mark-1019993_960_720.jpg" alt="" id="img_subcategory">
+                            <img src="https://cdn.pixabay.com/photo/2015/11/03/09/03/question-mark-1019993_960_720.jpg"
+                                 alt="" id="img_subcategory">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -146,14 +149,18 @@
                     </td>
                     <td>@if($outcome->subcategory_id != null)<img src="{{ asset($outcome->subcategory->pic) }}" alt="">
                         {{ $outcome->subcategory->title }}
-                            @endif
+                        @endif
                     </td>
                     <td>{{ $outcome->category->title }}</td>
                     <td class="account_sum">
                         {{ $outcome->total_sum }}
                     </td>
                     <td>{{ $outcome->currency }}</td>
-                    <td>{{ $outcome->seller->title }}</td>
+                    <td>
+                        @if($outcome->seller_id != null)
+                            {{ $outcome->seller->title }}
+                        @endif
+                    </td>
                     <td>{{ $outcome->comment }}</td>
                     <td class="edit">
                         <button><a href="outcome/{{ $outcome->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>

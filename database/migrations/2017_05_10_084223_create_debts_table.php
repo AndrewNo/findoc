@@ -19,7 +19,7 @@ class CreateDebtsTable extends Migration
             $table->float('total_sum');
             $table->string('currency');
             $table->string('type');
-            $table->string('agent_id')->references('id')->on('agents');
+            $table->string('agent_id')->references('id')->on('agents')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
         });

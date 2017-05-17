@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Income;
 use App\Models\Payer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,9 @@ class PayersController extends Controller
      */
     public function index()
     {
-        //
+        $payers = Payer::all();
+
+        return view('payers.index', ['payers' => $payers]);
     }
 
     /**
@@ -66,7 +69,7 @@ class PayersController extends Controller
      */
     public function edit(Payer $payer)
     {
-        //
+        return view('payers.edit', ['payer' => $payer]);
     }
 
     /**
@@ -78,7 +81,10 @@ class PayersController extends Controller
      */
     public function update(Request $request, Payer $payer)
     {
-        //
+        $payer->title = $request->seller_title;
+        $payer->save();
+
+        return redirect('payers');
     }
 
     /**
@@ -89,6 +95,13 @@ class PayersController extends Controller
      */
     public function destroy(Payer $payer)
     {
-        //
+        $incomes = Income::where('payer_id', '=', $payer->id)->get();
+        foreach ($incomes as $income) {
+            $income->payer_id = null;
+            $income->save();
+        }
+
+        $payer->delete();
+        return redirect('payers');
     }
 }

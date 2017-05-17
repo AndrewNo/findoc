@@ -17,7 +17,7 @@ class CreateIncomesTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->references('id')->on('categories');
             $table->integer('account_id')->references('id')->on('accounts');
-            $table->integer('payer_id')->references('id')->on('payers');
+            $table->integer('payer_id')->references('id')->on('payers')->nullable();
             $table->float('total_sum')->default(0);
             $table->string('currency');
             $table->text('comment')->nullable();

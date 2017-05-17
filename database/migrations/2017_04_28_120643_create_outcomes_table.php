@@ -18,7 +18,7 @@ class CreateOutcomesTable extends Migration
             $table->integer('category_id')->references('id')->on('categories');
             $table->integer('subcategory_id')->references('id')->on('subcategories')->nullable();
             $table->integer('account_id')->references('id')->on('accounts');
-            $table->integer('seller_id')->references('id')->on('sellers');
+            $table->integer('seller_id')->references('id')->on('sellers')->nullable();
             $table->float('total_sum')->default(0);
             $table->string('currency');
             $table->text('comment')->nullable();

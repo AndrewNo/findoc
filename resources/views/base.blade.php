@@ -32,6 +32,7 @@
                     <li><a href="/subcategories">Subcategories</a></li>
                     <li><a href="/sellers">Sellers</a></li>
                     <li><a href="/payers">Payers</a></li>
+                    <li><a href="/agents">Agents</a></li>
                 </ul>
             </li>
         </ul>

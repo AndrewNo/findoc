@@ -156,7 +156,11 @@
                         {{ $income->total_sum }}
                     </td>
                     <td>{{ $income->currency }}</td>
-                    <td>{{ $income->payer->title }}</td>
+                    <td>
+                        @if($income->payer_id != null)
+                            {{ $income->payer->title }}
+                        @endif
+                    </td>
                     <td>{{ $income->comment }}</td>
                     <td class="edit">
                         <button><a href="income/{{ $income->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
