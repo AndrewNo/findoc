@@ -1,6 +1,11 @@
 @extends('base')
 
 @section('content')
+    <div class="callendar">
+        <input type="date" value="{{ \Carbon\Carbon::today()->format('Y-m-d') }}" name="date">
+        <a href="/incomes"><i class="fa fa-repeat" aria-hidden="true"></i></a>
+    </div>
+
     <div class="new_account">
         <p>Add new income</p>
         <div id="add_account_modal">
@@ -137,7 +142,7 @@
         <table class="account">
             @if($incomes->count() != 0)
                 <tr>
-                    <th>Pic</th>
+                    <th>Category</th>
                     <th>Account</th>
                     <th>Sum</th>
                     <th>Currency</th>
@@ -150,8 +155,8 @@
             @foreach($incomes as $income)
 
                 <tr>
-                    <td><img src="{{ asset($income->category->pic) }}" alt=""></td>
-                    <td>{{ $income->category->title }}</td>
+                    <td class="category"><img src="{{ asset($income->category->pic) }}" alt="">{{ $income->category->title }}</td>
+                    <td>{{ $income->account->title }}</td>
                     <td class="account_sum">
                         {{ $income->total_sum }}
                     </td>

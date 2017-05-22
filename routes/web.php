@@ -28,6 +28,7 @@ Route::post('income/add', 'IncomesController@store');
 Route::delete('income/destroy/{income}', 'IncomesController@destroy');
 Route::get('income/{income}', 'IncomesController@edit');
 Route::post('income/update/{income}', 'IncomesController@update');
+Route::post('income/date', 'IncomesController@getByDate');
 
 Route::post('category/add', 'CategoriesController@store');
 
@@ -43,12 +44,14 @@ Route::post('outcome/add', 'OutcomesController@store');
 Route::delete('outcome/destroy/{outcome}', 'OutcomesController@destroy');
 Route::get('outcome/{outcome}', 'OutcomesController@edit');
 Route::post('outcome/update/{outcome}', 'OutcomesController@update');
+Route::post('outcome/date', 'OutcomesController@getByDate');
 
 Route::get('transfers', 'TransfersController@index');
 Route::post('transfer/add', 'TransfersController@store');
 Route::delete('transfer/destroy/{transfer}', 'TransfersController@destroy');
 Route::get('transfer/{transfer}', 'TransfersController@edit');
 Route::post('transfer/update/{transfer}', 'TransfersController@update');
+Route::post('transfer/date', 'TransfersController@getByDate');
 
 Route::get('debts', 'DebtsController@index');
 Route::post('debt/add', 'DebtsController@store');

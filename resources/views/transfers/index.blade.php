@@ -4,6 +4,10 @@
 @endsection
 
 @section('content')
+    <div class="callendar">
+        <input type="date" value="{{ \Carbon\Carbon::today()->format('Y-m-d') }}" name="date">
+        <a href="/transfers"><i class="fa fa-repeat" aria-hidden="true"></i></a>
+    </div>
     <h3>Add new transfer</h3>
     <div class="add_transfer">
         <i class="fa fa-plus" aria-hidden="true"></i>

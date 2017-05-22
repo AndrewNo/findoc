@@ -244,3 +244,25 @@ document.getElementById('exit_add_outcome').addEventListener('click', function (
     document.getElementById('comment').value = '';
     document.querySelector('#total_sum + span').innerText = '';
 });
+
+/*Show refresh calendar and show incomes in another day*/
+document.querySelector('.callendar input[name="date"]').addEventListener('change', function () {
+    document.querySelector('.callendar a').style.display = 'inline-block';
+    var input = document.createElement('input');
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', 'date');
+    input.value = this.value;
+
+    document.querySelector('form[action="outcome/add"]').appendChild(input);
+
+    axios.post('outcome/date', {
+        date: this.value
+    })
+        .then(function (response) {
+            document.querySelector('table.account').innerHTML = response.data;
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
+
+});

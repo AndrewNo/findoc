@@ -20,4 +20,9 @@ class Outcome extends Model
     {
         return $this->belongsTo(Seller::class);
     }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

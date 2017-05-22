@@ -2,6 +2,10 @@
 
 @section('content')
 
+    <div class="total">
+        <p>Total sum: </p><span></span>
+    </div>
+
     <div class="new_account">
         <p>Add new account</p>
         <div id="add_account_modal">
@@ -81,7 +85,7 @@
                             {{ $account->total_sum }}
                             @foreach($currencies as $currency)
                                 @if($account->currency != 'UAH' && $account->currency == $currency->cc)
-                                    <span class="exchange_rate"> 	&asymp;{!! $account->total_sum * $currency->rate
+                                    <span class="exchange_rate"> 	={!! $account->total_sum * $currency->rate
                                     !!} UAH</span>
                                 @endif
                             @endforeach
@@ -136,7 +140,7 @@
                             {{ $account->total_sum }}
                             @foreach($currencies as $currency)
                                 @if($account->currency != 'UAH' && $account->currency == $currency->cc)
-                                    <span class="exchange_rate"> 	&asymp;{!! $account->total_sum * $currency->rate
+                                    <span class="exchange_rate"> 	={!! $account->total_sum * $currency->rate
                                     !!} UAH</span>
                                 @endif
                             @endforeach

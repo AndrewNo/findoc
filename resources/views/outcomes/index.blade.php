@@ -4,6 +4,11 @@
 @endsection
 
 @section('content')
+    <div class="callendar">
+        <input type="date" value="{{ \Carbon\Carbon::today()->format('Y-m-d') }}" name="date">
+        <a href="/outcomes"><i class="fa fa-repeat" aria-hidden="true"></i></a>
+    </div>
+
     <h3>Add new outcome</h3>
     <div class="add_outcome">
         <i class="fa fa-plus" aria-hidden="true"></i>

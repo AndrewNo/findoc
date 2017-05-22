@@ -46,6 +46,23 @@ window.addEventListener("keydown", function(e){
     }
 }, true);
 
+/*Total sum in accounts*/
+var total_sum = 0;
+document.querySelectorAll('.account_sum').forEach(function (item) {
+    if (item.nextElementSibling.innerText != 'UAH') {
+        var reg = /\W[0-9]*\W[0-9]*\s/;
+        var sum = item.innerText.match(reg)[0].substr(1);
+        total_sum += +sum;
+    } else {
+        total_sum += + item.innerText;
+    }
+});
+document.querySelector('.total span').innerText = total_sum;
+if (total_sum < 0){
+    document.querySelector('.total span').style.color = 'red';
+}else {
+    document.querySelector('.total span').style.color = 'green';
+}
 
 
 

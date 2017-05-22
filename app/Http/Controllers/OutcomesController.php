@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Outcome;
 use App\Models\Seller;
 use App\Models\Subcategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OutcomesController extends Controller
@@ -18,7 +19,7 @@ class OutcomesController extends Controller
      */
     public function index()
     {
-        $outcomes = Outcome::all();
+        $outcomes = Outcome::whereBetween('created_at', [Carbon::today(), Carbon::tomorrow()])->get();
 
         $accounts = Account::where('is_active', '=', 1)->get();
 
@@ -56,9 +57,12 @@ class OutcomesController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $outcome = new Outcome();
+
+        if(isset($request->date) && !empty($request->date)) {
+            $outcome->created_at = Carbon::parse($request->date)->format('Y-m-d H:i:s');
+        }
+
         $outcome->category_id = $request->category_id;
         $outcome->subcategory_id = $request->subcategory_id;
         $outcome->account_id = $request->account_id;
@@ -180,5 +184,17 @@ class OutcomesController extends Controller
 
         $outcome->delete();
         return back();
+    }
+
+    public function getByDate(Request $request)
+    {
+        $date = Carbon::parse($request->date)->format('Y-m-d H:i:s');
+        $date_arr = explode('-', $date);
+        $next = Carbon::create($date_arr[0], $date_arr[1], substr($date_arr[2], 0, 2), 0, 0, 0);
+
+        $outcomes = Outcome::whereBetween('created_at', [$date, $next->endOfDay()->format('Y-m-d H:i:s')])->get();
+
+
+        return view('outcomes/bydate', ['outcomes' => $outcomes]);
     }
 }

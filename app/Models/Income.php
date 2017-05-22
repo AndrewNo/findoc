@@ -15,4 +15,9 @@ class Income extends Model
     {
         return $this->belongsTo(Payer::class);
     }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

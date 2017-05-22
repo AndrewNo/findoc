@@ -31755,6 +31755,25 @@ add_payer.addEventListener('click', function () {
     modal_payer.style.display = 'table';
 });
 
+/*Show refresh calendar and show incomes in another day*/
+document.querySelector('.callendar input[name="date"]').addEventListener('change', function () {
+    document.querySelector('.callendar a').style.display = 'inline-block';
+    var input = document.createElement('input');
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', 'date');
+    input.value = this.value;
+
+    document.querySelector('form[action="income/add"]').appendChild(input);
+
+    axios.post('income/date', {
+        date: this.value
+    }).then(function (response) {
+        document.querySelector('table.account').innerHTML = response.data;
+    }).catch(function (error) {
+        console.log(error);
+    });
+});
+
 /***/ }),
 /* 38 */,
 /* 39 */,

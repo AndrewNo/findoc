@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Transfer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransfersController extends Controller
@@ -16,7 +17,7 @@ class TransfersController extends Controller
     public function index()
     {
         $accounts = Account::where('is_active', '=', 1)->get();
-        $transfers = Transfer::all();
+        $transfers = Transfer::whereBetween('created_at', [Carbon::today(), Carbon::tomorrow()])->get();
 
         return view('transfers.index', [
             'accounts' => $accounts,
@@ -44,6 +45,11 @@ class TransfersController extends Controller
     {
 
         $transfer = new Transfer();
+
+        if(isset($request->date) && !empty($request->date)) {
+            $transfer->created_at = Carbon::parse($request->date)->format('Y-m-d H:i:s');
+        }
+
         $transfer->account_from = $request->account_from;
         $transfer->account_to = $request->account_to;
         $transfer->total_sum = $request->total_sum;
@@ -163,4 +169,18 @@ class TransfersController extends Controller
 
         return back();
     }
+
+    public function getByDate(Request $request)
+    {
+
+        $date = Carbon::parse($request->date)->format('Y-m-d H:i:s');
+        $date_arr = explode('-', $date);
+        $next = Carbon::create($date_arr[0], $date_arr[1], substr($date_arr[2], 0, 2), 0, 0, 0);
+
+        $transfers = Transfer::whereBetween('created_at', [$date, $next->endOfDay()->format('Y-m-d H:i:s')])->get();
+
+
+        return view('transfers/bydate', ['transfers' => $transfers]);
+    }
+
 }

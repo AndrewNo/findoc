@@ -6,6 +6,7 @@ use App\Models\Account;
 use App\Models\Category;
 use App\Models\Income;
 use App\Models\Payer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class IncomesController extends Controller
@@ -18,7 +19,7 @@ class IncomesController extends Controller
     public function index()
     {
 
-        $incomes = Income::all();
+        $incomes = Income::whereBetween('created_at', [Carbon::today(), Carbon::tomorrow()])->get();
 
         $categories = Category::where('type', '=', 'income')->get();
 
@@ -53,7 +54,12 @@ class IncomesController extends Controller
     public function store(Request $request)
     {
 
+
         $income = new Income();
+
+        if(isset($request->date) && !empty($request->date)) {
+            $income->created_at = Carbon::parse($request->date)->format('Y-m-d H:i:s');
+        }
 
         $income->category_id = $request->category_id;
         $income->account_id = $request->account_id;
@@ -169,5 +175,17 @@ class IncomesController extends Controller
 
         $income->delete();
         return back();
+    }
+
+    public function getByDate(Request $request)
+    {
+        $date = Carbon::parse($request->date)->format('Y-m-d H:i:s');
+        $date_arr = explode('-', $date);
+        $next = Carbon::create($date_arr[0], $date_arr[1], substr($date_arr[2], 0, 2), 0, 0, 0);
+
+        $incomes = Income::whereBetween('created_at', [$date, $next->endOfDay()->format('Y-m-d H:i:s')])->get();
+
+
+        return view('incomes/bydate', ['incomes' => $incomes]);
     }
 }

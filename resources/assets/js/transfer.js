@@ -1,3 +1,5 @@
+require('./bootstrap');
+
 /*Disactive one of accounts*/
 document.getElementById('account_from').addEventListener('change', function () {
     var account_from_value = this.value;
@@ -120,4 +122,26 @@ document.getElementById('exit_modal').addEventListener('click', function () {
     });
 
     document.getElementById('total_sum').value = '';
+});
+
+/*Show refresh calendar and show incomes in another day*/
+document.querySelector('.callendar input[name="date"]').addEventListener('change', function () {
+    document.querySelector('.callendar a').style.display = 'inline-block';
+    var input = document.createElement('input');
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', 'date');
+    input.value = this.value;
+
+    document.querySelector('form[action="transfer/add"]').appendChild(input);
+
+    axios.post('transfer/date', {
+        date: this.value
+    })
+        .then(function (response) {
+            document.querySelector('table.account').innerHTML = response.data;
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
+
 });
