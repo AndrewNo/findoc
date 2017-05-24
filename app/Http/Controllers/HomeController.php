@@ -19,7 +19,7 @@ class HomeController extends Controller
         $data = [];
 
         foreach ($incomes as $income) {
-            $data[] = [$income->account->title, $income->total_sum/$total_sum];
+            $data[] = [$income->category->title, $income->total_sum/$total_sum];
         }
 
         $data = json_encode($data);
