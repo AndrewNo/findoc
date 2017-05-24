@@ -22,7 +22,8 @@
                     <div class="modal-body">
                         <form action="income/add" method="post">
                             <label for="account">Account</label>
-                            <select name="account_id" id="account">
+                            <input type="text" id="account_search">
+                            <select name="account_id" id="account" size="5">
                                 <option value="" disabled="disabled" selected>Choose account</option>
                                 @foreach($accounts as $account)
                                     <option value="{{ $account->id }}"
@@ -32,8 +33,8 @@
                             <label for="total_sum">Sum:</label>
                             <input type="number" step="0.01" id="total_sum" required name="total_sum"><span></span>
                             <label for="category_id">Category:</label>
-                            <select name="category_id" id="category_id">
-
+                            <input type="text" id="category_search">
+                            <select name="category_id" id="category_id" size="5">
                                 <option value="" disabled="disabled" selected>Choose category</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}"
@@ -46,13 +47,12 @@
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </div>
                             <label for="payer_id">Payer:</label>
-                            <select name="payer_id" id="payer_id">
-
+                            <input type="text" id="payer_search">
+                            <select name="payer_id" id="payer_id" size="5">
                                 <option value="" disabled="disabled" selected>Choose payer</option>
                                 @foreach($payers as $payer)
                                     <option value="{{ $payer->id }}">{{ $payer->title }}</option>
                                 @endforeach
-
                             </select>
                             <div class="add_payer" title="Add payer">
                                 <i class="fa fa-plus" aria-hidden="true"></i>

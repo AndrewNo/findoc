@@ -21,12 +21,29 @@ modal_add_account.addEventListener('click', function () {
 document.querySelector('.modal-default-button').addEventListener('click', function () {
     modal_mask.style.display = 'none';
     document.getElementById('account').value = '';
+    document.getElementById('account_search').value = '';
+    document.getElementById('category_search').value = '';
+    document.getElementById('payer_search').value = '';
     document.getElementById('total_sum').value = '';
     document.getElementById('category_id').value = '';
     document.getElementById('payer_id').value = '';
     document.getElementById('comment').value = '';
     document.getElementById('img_category').src = '';
     document.querySelector('#total_sum + span').innerText = '';
+
+    for (var i = 0; i < document.getElementById('category_id').options.length; i++) {
+        document.getElementById('category_id').options[i].style.display = 'block';
+    }
+
+    for (var i = 0; i < document.getElementById('account').options.length; i++) {
+        document.getElementById('account').options[i].style.display = 'block';
+
+    }
+
+    for (var i = 0; i < document.getElementById('payer_id').options.length; i++) {
+        document.getElementById('payer_id').options[i].style.display = 'block';
+    }
+
 });
 
 /*Category image*/
@@ -172,9 +189,49 @@ document.querySelector('.callendar input[name="date"]').addEventListener('change
     })
         .then(function (response) {
             document.querySelector('table.account').innerHTML = response.data;
-    })
+        })
         .catch(function (error) {
             console.log(error)
         });
 
 });
+
+/*Search category*/
+document.getElementById('category_search').addEventListener('keyup', function () {
+    var search = new RegExp(this.value, 'ig');
+    var options = document.getElementById('category_id').options;
+    for (var i = 0; i < options.length; i++) {
+        if (!options[i].innerText.match(search)) {
+            options[i].style.display = 'none';
+        } else {
+            options[i].style.display = 'block';
+        }
+    }
+});
+
+/*Search account*/
+document.getElementById('account_search').addEventListener('keyup', function () {
+    var search = new RegExp(this.value, 'ig');
+    var options = document.getElementById('account').options;
+    for (var i = 0; i < options.length; i++) {
+        if (!options[i].innerText.match(search)) {
+            options[i].style.display = 'none';
+        } else {
+            options[i].style.display = 'block';
+        }
+    }
+});
+
+/*Search payer*/
+document.getElementById('payer_search').addEventListener('keyup', function () {
+    var search = new RegExp(this.value, 'ig');
+    var options = document.getElementById('payer_id').options;
+    for (var i = 0; i < options.length; i++) {
+        if (!options[i].innerText.match(search)) {
+            options[i].style.display = 'none';
+        } else {
+            options[i].style.display = 'block';
+        }
+    }
+});
+
