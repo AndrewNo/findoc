@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function (){
-    return view('index');
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('accounts', 'AccountsController@index');
 Route::post('account/add', 'AccountsController@store');

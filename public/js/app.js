@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 61);
+/******/ 	return __webpack_require__(__webpack_require__.s = 62);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -31612,7 +31612,7 @@ module.exports = function(module) {
 
 __webpack_require__(26);
 
-window.Vue = __webpack_require__(60);
+window.Vue = __webpack_require__(61);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31620,7 +31620,7 @@ window.Vue = __webpack_require__(60);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(57));
+Vue.component('example', __webpack_require__(58));
 
 var app = new Vue({
   el: '#app'
@@ -31706,6 +31706,12 @@ var app = new Vue({
 
 /***/ }),
 /* 56 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31734,14 +31740,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(58)(
+var Component = __webpack_require__(59)(
   /* script */
-  __webpack_require__(56),
+  __webpack_require__(57),
   /* template */
-  __webpack_require__(59),
+  __webpack_require__(60),
   /* scopeId */
   null,
   /* cssModules */
@@ -31768,7 +31774,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -31825,7 +31831,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -31854,7 +31860,7 @@ if (false) {
 }
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41182,12 +41188,12 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(32);
-__webpack_require__(54);
 __webpack_require__(55);
+__webpack_require__(56);
 __webpack_require__(45);
 __webpack_require__(46);
 __webpack_require__(47);
@@ -41196,7 +41202,8 @@ __webpack_require__(49);
 __webpack_require__(50);
 __webpack_require__(51);
 __webpack_require__(52);
-module.exports = __webpack_require__(53);
+__webpack_require__(53);
+module.exports = __webpack_require__(54);
 
 
 /***/ })
