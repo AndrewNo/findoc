@@ -35,12 +35,13 @@
             <select name="account" id="accounts"></select>
         </section>
         <section id="content-tab2">
+            <div id="circle">Circle</div>
+            <div id="line">Line</div>
+            <div id="incomes_line"></div>
             <div id="incomes"></div>
         </section>
         <section id="content-tab3">
-            <p>
-                Здесь размещаете любое содержание....
-            </p>
+            <div id="outcomes"></div>
         </section>
         <section id="content-tab4">
             <p>
@@ -90,6 +91,17 @@
 
 
     <script type="text/javascript">
+        document.getElementById('line').addEventListener('click', function () {
+            document.getElementById('incomes').style.display = 'none';
+            document.getElementById('incomes_line').style.display = 'block';
+        });
+
+        document.getElementById('circle').addEventListener('click', function () {
+            document.getElementById('incomes').style.display = 'block';
+            document.getElementById('incomes_line').style.display = 'none';
+        });
+
+
         google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -98,11 +110,61 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Element');
             data.addColumn('number', 'Percentage');
-            data.addRows({!! $data !!});
-
+            data.addRows({!! $incomes !!});
+            var options = {
+                width: 800
+            };
             // Instantiate and draw the chart.
             var chart = new google.visualization.PieChart(document.getElementById('incomes'));
-            chart.draw(data, null);
+            chart.draw(data, options);
+        }
+
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawTrendlines);
+
+        function drawTrendlines() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Date');
+
+            data.addColumn('number', 'Income');
+
+            data.addRows({!! $income_trend !!});
+
+            var options = {
+                hAxis: {
+                    title: 'Date',
+                },
+                vAxis: {
+                    title: 'Sum'
+                },
+
+                colors: ['#AB0D06', '#007329'],
+                width: 800
+
+
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('incomes_line'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Define the chart to be drawn.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Element');
+            data.addColumn('number', 'Percentage');
+            data.addRows({!! $outcomes !!});
+
+            var options = {
+                width: 800
+            };
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.PieChart(document.getElementById('outcomes'));
+            chart.draw(data, options);
         }
     </script>
 @endsection
