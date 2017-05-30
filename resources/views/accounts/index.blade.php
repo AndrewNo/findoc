@@ -27,8 +27,9 @@
                             <input type="number" step="0.01" id="total_sum" required name="total_sum">
                             <label for="currency">Currency:</label>
                             <select name="currency" id="currency">
+                                <option value="UAH" selected>Гривня</option>
                                 @foreach($currencies as $currency)
-                                    <option value="{{ $currency->cc }}" @if($currency->cc === 'UAH') selected @endif>{{
+                                    <option value="{{ $currency->cc }}">{{
                                     $currency->txt
                                     }}</option>
                                 @endforeach
