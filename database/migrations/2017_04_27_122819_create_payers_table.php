@@ -16,6 +16,7 @@ class CreatePayersTable extends Migration
         Schema::create('payers', function (Blueprint $table){
             $table->increments('id');
             $table->string('title');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

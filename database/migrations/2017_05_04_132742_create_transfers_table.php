@@ -19,6 +19,7 @@ class CreateTransfersTable extends Migration
             $table->string('account_to')->references('id')->on('accounts');
             $table->float('total_sum');
             $table->string('currency');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

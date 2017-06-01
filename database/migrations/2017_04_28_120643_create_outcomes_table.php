@@ -22,6 +22,7 @@ class CreateOutcomesTable extends Migration
             $table->float('total_sum')->default(0);
             $table->string('currency');
             $table->text('comment')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

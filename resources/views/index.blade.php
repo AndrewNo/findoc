@@ -84,18 +84,28 @@
             document.getElementById('incomes').style.display = 'none';
             document.getElementById('incomes_bar').style.display = 'none';
             document.getElementById('incomes_line').style.display = 'block';
+            this.style.background = 'rgba(254,214,218, 0.5)';
+            document.getElementById('bar').style.background = 'none';
+            document.getElementById('circle').style.background = 'none';
+
         });
 
         document.getElementById('circle').addEventListener('click', function () {
             document.getElementById('incomes').style.display = 'block';
             document.getElementById('incomes_line').style.display = 'none';
             document.getElementById('incomes_bar').style.display = 'none';
+            this.style.background = 'rgba(254,214,218, 0.5)';
+            document.getElementById('bar').style.background = 'none';
+            document.getElementById('line').style.background = 'none';
         });
 
         document.getElementById('bar').addEventListener('click', function () {
             document.getElementById('incomes').style.display = 'none';
             document.getElementById('incomes_line').style.display = 'none';
             document.getElementById('incomes_bar').style.display = 'block';
+            this.style.background = 'rgba(254,214,218, 0.5)';
+            document.getElementById('line').style.background = 'none';
+            document.getElementById('circle').style.background = 'none';
         });
 
 

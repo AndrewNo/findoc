@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         /*Incomes kostulno*/
-        $all_incomes = Income::orderBy('created_at', 'asc')->get();
+        $all_incomes = Income::withTrashed()->orderBy('created_at', 'asc')->get();
 
         $income_total_sum = 0;
         $incomes_by_cat = [];
@@ -61,7 +61,7 @@ class HomeController extends Controller
 
 
         /*Outcomes kostulno*/
-        $all_outcomes = Outcome::orderBy('created_at', 'asc')->get();
+        $all_outcomes = Outcome::withTrashed()->orderBy('created_at', 'asc')->get();
 
         $outcome_total_sum = 0;
         $outcomes_by_cat = [];
@@ -103,7 +103,7 @@ class HomeController extends Controller
         $outcomes = json_encode($outcomes);
         $outcome_trend = json_encode($outcome_trend);
 
-        $accounts = Account::all();
+        $accounts = Account::withTrashed()->get();
 
         return view('index', [
             'incomes' => $incomes,
@@ -117,8 +117,8 @@ class HomeController extends Controller
     public function analyzeAccount(Request $request)
     {
 
-        $income_account = Income::where('account_id', '=', $request->account_id)->get();
-        $outcome_account = Outcome::where('account_id', '=', $request->account_id)->get();
+        $income_account = Income::withTrashed()->where('account_id', '=', $request->account_id)->get();
+        $outcome_account = Outcome::withTrashed()->where('account_id', '=', $request->account_id)->get();
 
 
         $income_total_sum = 0;

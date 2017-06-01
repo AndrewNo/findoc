@@ -21,6 +21,7 @@ class CreateDebtsTable extends Migration
             $table->string('type');
             $table->string('agent_id')->references('id')->on('agents')->nullable();
             $table->text('comment')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

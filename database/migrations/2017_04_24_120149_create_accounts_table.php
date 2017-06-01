@@ -20,6 +20,7 @@ class CreateAccountsTable extends Migration
             $table->string('currency');
             $table->string('pic')->nullable();
             $table->boolean('is_active')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
