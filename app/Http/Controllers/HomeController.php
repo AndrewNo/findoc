@@ -12,6 +12,8 @@ class HomeController extends Controller
 {
     public function index()
     {
+
+
         /*Incomes kostulno*/
         $all_incomes = Income::withTrashed()->orderBy('created_at', 'asc')->get();
 

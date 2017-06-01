@@ -124,6 +124,10 @@ document.querySelectorAll('.account_sum').forEach(function (item) {
     if (item.nextElementSibling.innerText != 'UAH') {
         var reg = /\W[0-9]*\W[0-9]*\s/;
         var sum = item.innerText.match(reg)[0].substr(1);
+
+        if (sum == '=0 ') {
+            sum = 0;
+        }
         total_sum += +sum;
     } else {
         total_sum += +item.innerText;

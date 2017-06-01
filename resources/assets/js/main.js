@@ -40,7 +40,7 @@ document.querySelector('.modal-default-button').addEventListener('click', functi
     document.querySelector('input[name="pic"]').value = '';
 });
 
-window.addEventListener("keydown", function(e){
+window.addEventListener("keydown", function (e) {
     if (e.keyCode == 27) {
         modal_mask.style.display = 'none';
     }
@@ -52,15 +52,19 @@ document.querySelectorAll('.account_sum').forEach(function (item) {
     if (item.nextElementSibling.innerText != 'UAH') {
         var reg = /\W[0-9]*\W[0-9]*\s/;
         var sum = item.innerText.match(reg)[0].substr(1);
+
+        if (sum == '=0 ') {
+            sum = 0;
+        }
         total_sum += +sum;
     } else {
-        total_sum += + item.innerText;
+        total_sum += +item.innerText;
     }
 });
 document.querySelector('.total span').innerText = total_sum;
-if (total_sum < 0){
+if (total_sum < 0) {
     document.querySelector('.total span').style.color = 'red';
-}else {
+} else {
     document.querySelector('.total span').style.color = 'green';
 }
 
