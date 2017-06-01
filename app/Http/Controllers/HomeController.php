@@ -58,6 +58,8 @@ class HomeController extends Controller
         $income_trend = json_encode($income_trend);
 
 
+
+
         /*Outcomes kostulno*/
         $all_outcomes = Outcome::orderBy('created_at', 'asc')->get();
 

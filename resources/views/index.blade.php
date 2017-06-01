@@ -43,7 +43,9 @@
         <section id="content-tab2">
             <div id="circle">Circle</div>
             <div id="line">Line</div>
+            <div id="bar">Bar</div>
             <div id="incomes_line"></div>
+            <div id="incomes_bar"></div>
             <div id="incomes"></div>
         </section>
         <section id="content-tab3">
@@ -80,12 +82,20 @@
     <script type="text/javascript">
         document.getElementById('line').addEventListener('click', function () {
             document.getElementById('incomes').style.display = 'none';
+            document.getElementById('incomes_bar').style.display = 'none';
             document.getElementById('incomes_line').style.display = 'block';
         });
 
         document.getElementById('circle').addEventListener('click', function () {
             document.getElementById('incomes').style.display = 'block';
             document.getElementById('incomes_line').style.display = 'none';
+            document.getElementById('incomes_bar').style.display = 'none';
+        });
+
+        document.getElementById('bar').addEventListener('click', function () {
+            document.getElementById('incomes').style.display = 'none';
+            document.getElementById('incomes_line').style.display = 'none';
+            document.getElementById('incomes_bar').style.display = 'block';
         });
 
 
@@ -132,6 +142,40 @@
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('incomes_line'));
+            chart.draw(data, options);
+        }
+
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawMultSeries);
+
+        function drawMultSeries() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '');
+            data.addColumn('number', '');
+
+
+
+            data.addRows({!! $incomes !!});
+
+            var options = {
+                title: 'Accounts',
+                hAxis: {
+
+                    viewWindow: {
+                        min: [7, 30, 0],
+                        max: [17, 30, 0]
+                    }
+                },
+                vAxis: {
+                    title: 'Sum'
+                },
+                legend: { position: "none" },
+
+            };
+
+            var chart = new google.visualization.ColumnChart(
+                document.getElementById('incomes_bar'));
+
             chart.draw(data, options);
         }
     </script>
