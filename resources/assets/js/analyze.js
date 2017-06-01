@@ -14,6 +14,7 @@ document.getElementById('accounts').addEventListener('change', function () {
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', '');
                 data.addColumn('number', '');
+                data.addColumn({type:'string', role:'style'});
 
 
                 data.addRows(response.data);
@@ -29,7 +30,8 @@ document.getElementById('accounts').addEventListener('change', function () {
                     },
                     vAxis: {
                         title: 'Sum'
-                    }
+                    },
+                    legend: { position: "none" }
                 };
 
                 var chart = new google.visualization.ColumnChart(

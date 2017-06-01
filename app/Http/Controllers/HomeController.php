@@ -129,7 +129,7 @@ class HomeController extends Controller
             $outcome_total_sum += $item->total_sum;
         }
 
-        $account_an = [['Income', $income_total_sum], ['Outcome', $outcome_total_sum]];
+        $account_an = [['Income', $income_total_sum, 'green'], ['Outcome', $outcome_total_sum, 'red']];
 
 
 
