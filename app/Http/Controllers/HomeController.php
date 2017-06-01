@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Income;
 use App\Models\Outcome;
 use Carbon\Carbon;
@@ -15,7 +16,7 @@ class HomeController extends Controller
         $all_incomes = Income::orderBy('created_at', 'asc')->get();
 
         $income_total_sum = 0;
-        $incomes_by_cat =[];
+        $incomes_by_cat = [];
         $income_trend = [];
         $d = [];
         foreach ($all_incomes as $income) {
@@ -38,13 +39,13 @@ class HomeController extends Controller
             }
         }
 
-        foreach ($d as $key => $value ) {
+        foreach ($d as $key => $value) {
             $income_trend[] = [$key, $value];
         }
 
 
         foreach ($incomes_by_cat as $key => $value) {
-            $incomes_by_cat[$key] = $value/$income_total_sum;
+            $incomes_by_cat[$key] = $value / $income_total_sum;
         }
 
         $incomes = [];
@@ -61,8 +62,8 @@ class HomeController extends Controller
         $all_outcomes = Outcome::orderBy('created_at', 'asc')->get();
 
         $outcome_total_sum = 0;
-        $outcomes_by_cat =[];
-        $outcomes_by_date =[];
+        $outcomes_by_cat = [];
+        $outcomes_by_date = [];
         $outcome_trend = [];
         foreach ($all_outcomes as $outcome) {
             $outcome_total_sum += $outcome->total_sum;
@@ -84,7 +85,7 @@ class HomeController extends Controller
         }
 
         foreach ($outcomes_by_cat as $key => $value) {
-            $outcomes_by_cat[$key] = $value/$outcome_total_sum;
+            $outcomes_by_cat[$key] = $value / $outcome_total_sum;
         }
 
         $outcomes = [];
@@ -93,13 +94,45 @@ class HomeController extends Controller
             $outcomes[] = [$key, $value];
         }
 
-        foreach ($outcomes_by_date as $key => $value ) {
+        foreach ($outcomes_by_date as $key => $value) {
             $outcome_trend[] = [$key, $value];
         }
 
         $outcomes = json_encode($outcomes);
         $outcome_trend = json_encode($outcome_trend);
 
-        return view('index', ['incomes' => $incomes, 'income_trend' => $income_trend, 'outcomes' => $outcomes, 'outcome_trend' => $outcome_trend]);
+        $accounts = Account::all();
+
+        return view('index', [
+            'incomes' => $incomes,
+            'income_trend' => $income_trend,
+            'outcomes' => $outcomes,
+            'outcome_trend' => $outcome_trend,
+            'accounts' => $accounts
+        ]);
+    }
+
+    public function analyzeAccount(Request $request)
+    {
+
+        $income_account = Income::where('account_id', '=', $request->account_id)->get();
+        $outcome_account = Outcome::where('account_id', '=', $request->account_id)->get();
+
+
+        $income_total_sum = 0;
+        foreach ($income_account as $item) {
+            $income_total_sum += $item->total_sum;
+        }
+
+        $outcome_total_sum = 0;
+        foreach ($outcome_account as $item) {
+            $outcome_total_sum += $item->total_sum;
+        }
+
+        $account_an = [['Income', $income_total_sum], ['Outcome', $outcome_total_sum]];
+
+
+
+        return $account_an;
     }
 }

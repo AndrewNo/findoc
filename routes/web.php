@@ -11,6 +11,7 @@
 |
 */
 Route::get('/', 'HomeController@index');
+Route::post('/analyze_account', 'HomeController@analyzeAccount');
 
 Route::get('accounts', 'AccountsController@index');
 Route::post('account/add', 'AccountsController@store');

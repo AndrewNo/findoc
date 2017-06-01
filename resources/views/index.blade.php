@@ -32,7 +32,13 @@
 
         <section id="content-tab1">
             <label for="accounts">Choose account:</label>
-            <select name="account" id="accounts"></select>
+            <select name="account" id="accounts">
+                <option value="" selected disabled>Choose account</option>
+                @foreach($accounts as $account)
+                    <option value="{{ $account->id }}">{{ $account->title }}</option>
+                @endforeach
+            </select>
+            <div id="account_analyze"></div>
         </section>
         <section id="content-tab2">
             <div id="circle">Circle</div>
@@ -188,4 +194,5 @@
             chart.draw(data, options);
         }
     </script>
+    <script src="{{ asset('js/analyze.js') }}"></script>
 @endsection

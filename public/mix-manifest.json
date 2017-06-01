@@ -23,5 +23,6 @@
   "/js/subcategory_edit.js": "/js/subcategory_edit.js",
   "/js/main.js": "/js/main.js",
   "/js/edit.js": "/js/edit.js",
-  "/js/category_edit.js": "/js/category_edit.js"
+  "/js/category_edit.js": "/js/category_edit.js",
+  "/js/analyze.js": "/js/analyze.js"
 }
