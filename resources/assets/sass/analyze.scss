@@ -148,7 +148,7 @@
   }
 }
 
-#line, #circle {
+#line, #circle, #line_outcome, #circle_outcome {
   text-align: center;
   padding: 5px;
   cursor: pointer;
@@ -157,6 +157,6 @@
   box-shadow: 1px 1px rgba(0,0,0,0.3);
   display: inline-block;
 }
-#incomes_line {
+#incomes_line, #outcomes_line {
   display: none;
 }

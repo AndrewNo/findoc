@@ -41,6 +41,9 @@
             <div id="incomes"></div>
         </section>
         <section id="content-tab3">
+            <div id="circle_outcome">Circle</div>
+            <div id="line_outcome">Line</div>
+            <div id="outcomes_line"></div>
             <div id="outcomes"></div>
         </section>
         <section id="content-tab4">
@@ -66,28 +69,6 @@
     </div>
 
 
-    {{--<div id="myPieChart"></div>
-
-    <script type="text/javascript">
-        google.charts.load('current', {packages: ['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            // Define the chart to be drawn.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Element');
-            data.addColumn('number', 'Percentage');
-            data.addRows([
-                ['Nitrogen', 0.78],
-                ['Oxygen', 0.21],
-                ['Other', 0.01]
-            ]);
-
-            // Instantiate and draw the chart.
-            var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
-            chart.draw(data, null);
-        }
-    </script>--}}
 
 
     <script type="text/javascript">
@@ -149,6 +130,17 @@
         }
     </script>
     <script type="text/javascript">
+
+        document.getElementById('line_outcome').addEventListener('click', function () {
+            document.getElementById('outcomes').style.display = 'none';
+            document.getElementById('outcomes_line').style.display = 'block';
+        });
+
+        document.getElementById('circle_outcome').addEventListener('click', function () {
+            document.getElementById('outcomes').style.display = 'block';
+            document.getElementById('outcomes_line').style.display = 'none';
+        });
+
         google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -164,6 +156,35 @@
             };
             // Instantiate and draw the chart.
             var chart = new google.visualization.PieChart(document.getElementById('outcomes'));
+            chart.draw(data, options);
+        }
+
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawTrendlines);
+
+        function drawTrendlines() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Date');
+
+            data.addColumn('number', 'Outcome');
+
+            data.addRows({!! $outcome_trend !!});
+
+            var options = {
+                hAxis: {
+                    title: 'Date',
+                },
+                vAxis: {
+                    title: 'Sum'
+                },
+
+                colors: ['#AB0D06', '#007329'],
+                width: 800
+
+
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('outcomes_line'));
             chart.draw(data, options);
         }
     </script>

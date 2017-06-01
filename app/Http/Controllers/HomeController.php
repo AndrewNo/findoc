@@ -12,15 +12,16 @@ class HomeController extends Controller
     public function index()
     {
         /*Incomes kostulno*/
-        $all_incomes = Income::all();
+        $all_incomes = Income::orderBy('created_at', 'asc')->get();
 
         $income_total_sum = 0;
         $incomes_by_cat =[];
         $income_trend = [];
+        $d = [];
         foreach ($all_incomes as $income) {
             $income_total_sum += $income->total_sum;
             $incomes_by_cat[$income->category->title] = 0;
-            $income_trend[] = [Carbon::parse($income->created_at)->format('d-M-Y'), $income->total_sum];
+            $d[Carbon::parse($income->created_at)->format('d-M-Y')] = 0;
         }
 
         foreach ($all_incomes as $income) {
@@ -29,7 +30,18 @@ class HomeController extends Controller
                     $incomes_by_cat[$key] += $income->total_sum;
                 }
             }
+
+            foreach ($d as $key => $item) {
+                if ($key == Carbon::parse($income->created_at)->format('d-M-Y')) {
+                    $d[$key] += $income->total_sum;
+                }
+            }
         }
+
+        foreach ($d as $key => $value ) {
+            $income_trend[] = [$key, $value];
+        }
+
 
         foreach ($incomes_by_cat as $key => $value) {
             $incomes_by_cat[$key] = $value/$income_total_sum;
@@ -46,19 +58,27 @@ class HomeController extends Controller
 
 
         /*Outcomes kostulno*/
-        $all_outcomes = Outcome::all();
+        $all_outcomes = Outcome::orderBy('created_at', 'asc')->get();
 
         $outcome_total_sum = 0;
         $outcomes_by_cat =[];
+        $outcomes_by_date =[];
+        $outcome_trend = [];
         foreach ($all_outcomes as $outcome) {
             $outcome_total_sum += $outcome->total_sum;
             $outcomes_by_cat[$outcome->category->title] = 0;
+            $outcomes_by_date[Carbon::parse($outcome->created_at)->format('d-M-Y')] = 0;
         }
 
         foreach ($all_outcomes as $outcome) {
             foreach ($outcomes_by_cat as $key => $item) {
                 if ($key == $outcome->category->title) {
                     $outcomes_by_cat[$key] += $outcome->total_sum;
+                }
+            }
+            foreach ($outcomes_by_date as $key => $item) {
+                if ($key == Carbon::parse($outcome->created_at)->format('d-M-Y')) {
+                    $outcomes_by_date[$key] += $outcome->total_sum;
                 }
             }
         }
@@ -73,9 +93,13 @@ class HomeController extends Controller
             $outcomes[] = [$key, $value];
         }
 
+        foreach ($outcomes_by_date as $key => $value ) {
+            $outcome_trend[] = [$key, $value];
+        }
 
         $outcomes = json_encode($outcomes);
+        $outcome_trend = json_encode($outcome_trend);
 
-        return view('index', ['incomes' => $incomes, 'income_trend' => $income_trend, 'outcomes' => $outcomes]);
+        return view('index', ['incomes' => $incomes, 'income_trend' => $income_trend, 'outcomes' => $outcomes, 'outcome_trend' => $outcome_trend]);
     }
 }
