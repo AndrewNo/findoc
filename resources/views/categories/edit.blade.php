@@ -26,7 +26,7 @@
             <option value="outcome" @if($category->type == 'outcome') selected @endif>Outcome</option>
         </select>
         <input type="hidden" name="pic" value="{{ $category->pic }}">
-        <input type="hidden" name="type" value="income">
+
 
         {{ csrf_field() }}
         <input type="submit">
