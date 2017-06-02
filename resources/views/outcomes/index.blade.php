@@ -149,14 +149,26 @@
             @foreach($outcomes as $outcome)
 
                 <tr>
-                    <td><img src="{{ asset($outcome->category->pic) }}" alt="">
-                        {{ $outcome->category->title }} ->
-                    </td>
-                    <td>@if($outcome->subcategory_id != null)<img src="{{ asset($outcome->subcategory->pic) }}" alt="">
-                        {{ $outcome->subcategory->title }}
+                    <td>
+                        @if($outcome->category_id != null)
+                            <img src="{{ asset($outcome->category->pic) }}" alt="">
+                            {{ $outcome->category->title }} ->
+                        @else
+                            No category ->
                         @endif
                     </td>
-                    <td>{{ $outcome->category->title }}</td>
+                    <td>
+                        @if($outcome->subcategory_id != null)
+                            <img src="{{ asset($outcome->subcategory->pic) }}" alt="">
+                            {{ $outcome->subcategory->title }}
+                        @else
+                            No subcategory
+                        @endif
+                    </td>
+                    <td>
+                        {{ $outcome->account->title }}
+
+                    </td>
                     <td class="account_sum">
                         {{ $outcome->total_sum }}
                     </td>

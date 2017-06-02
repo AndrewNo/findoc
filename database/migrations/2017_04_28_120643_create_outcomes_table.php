@@ -15,7 +15,7 @@ class CreateOutcomesTable extends Migration
     {
         Schema::create('outcomes', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('category_id')->references('id')->on('categories');
+            $table->integer('category_id')->references('id')->on('categories')->nullable();
             $table->integer('subcategory_id')->references('id')->on('subcategories')->nullable();
             $table->integer('account_id')->references('id')->on('accounts');
             $table->integer('seller_id')->references('id')->on('sellers')->nullable();

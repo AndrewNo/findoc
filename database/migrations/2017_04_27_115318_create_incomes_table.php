@@ -15,7 +15,7 @@ class CreateIncomesTable extends Migration
     {
         Schema::create('incomes', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('category_id')->references('id')->on('categories');
+            $table->integer('category_id')->references('id')->on('categories')->nullable();
             $table->integer('account_id')->references('id')->on('accounts');
             $table->integer('payer_id')->references('id')->on('payers')->nullable();
             $table->float('total_sum')->default(0);

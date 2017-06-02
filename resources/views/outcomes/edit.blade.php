@@ -20,15 +20,26 @@
         <label for="category_id">Category:</label>
         <select name="category_id" id="category_id">
             <option value="" disabled selected>Choose category</option>
-            @foreach($categories as $category)
-                <option value="{{ $category->id }}" data-img="{{ $category->pic }}"
-                        @if($category->id == $outcome->category_id) selected @endif >{{
+
+            @if($outcome->category_id != null)
+
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" data-img="{{ $category->pic }}"
+                            @if($category->id == $outcome->category_id) selected @endif >{{
                 $category->title
                             }}</option>
-            @endforeach
+                @endforeach
+            @else
+
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" data-img="{{ $category->pic }}">{{$category->title}}</option>
+                @endforeach
+            @endif
         </select>
         <div class="add_category" title="New category">
-            <img src="{{ asset($outcome->category->pic) }}" alt="" id="img_category">
+            @if($outcome->category_id != null)
+                <img src="{{ asset($outcome->category->pic) }}" alt="" id="img_category">
+            @endif
             <i class="fa fa-plus" aria-hidden="true"></i>
         </div>
 
@@ -36,13 +47,20 @@
             <label for="subcategory_id">Subcategory:</label>
             <select name="subcategory_id" id="subcategory_id">
                 <option value="" disabled selected>Choose subcategory</option>
-
+                @if($outcome->subcategory_id != null)
                     @foreach($subcategories as $subcategory)
                         <option value="{{ $subcategory->id }}" data-img="{{ $subcategory->pic }}"
                                 @if($subcategory->id == $outcome->subcategory_id) selected @endif >{{
                 $subcategory->title
                             }}</option>
                     @endforeach
+                @else
+                    @foreach($subcategories as $subcategory)
+                        <option value="{{ $subcategory->id }}" data-img="{{ $subcategory->pic }}">{{
+                $subcategory->title
+                            }}</option>
+                    @endforeach
+                @endif
 
             </select>
             <div class="add_subcategory" title="New subcategory">

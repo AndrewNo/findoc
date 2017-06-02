@@ -155,7 +155,13 @@
             @foreach($incomes as $income)
 
                 <tr>
-                    <td class="category"><img src="{{ asset($income->category->pic) }}" alt="">{{ $income->category->title }}</td>
+                    <td class="category">
+                        @if($income->category_id != null)
+                        <img src="{{ asset($income->category->pic) }}" alt="">{{ $income->category->title }}
+                        @else
+                            No category
+                        @endif
+                    </td>
                     <td>{{ $income->account->title }}</td>
                     <td class="account_sum">
                         {{ $income->total_sum }}

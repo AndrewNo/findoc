@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Income;
+use App\Models\Outcome;
 use App\Models\Subcategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -113,6 +115,21 @@ class CategoriesController extends Controller
         $subCategories = Subcategory::where('category_id', '=', $category->id)->get();
         foreach ($subCategories as $subCategory) {
             $subCategory->delete();
+        }
+
+        $incomes = Income::where('category_id', '=', $category->id)->get();
+
+        foreach ($incomes as $income) {
+            $income->category_id = null;
+            $income->save();
+        }
+
+        $outcomes = Outcome::where('category_id', '=', $category->id)->get();
+
+        foreach ($outcomes as $outcome) {
+            $outcome->category_id = null;
+            $outcome->subcategory_id = null;
+            $outcome->save();
         }
 
         $category->delete();
