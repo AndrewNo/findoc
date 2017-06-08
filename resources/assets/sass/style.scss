@@ -84,9 +84,8 @@ table.account {
         width: 100%;
         text-align: right;
         span.exchange_rate {
-          position: absolute;
-          bottom: 0;
-          right: 0;
+          display: block;
+
         }
       }
       td.inactive {
@@ -361,3 +360,4 @@ table.account {
     background: linear-gradient(135deg, rgba(179, 220, 237, 1) 0%, rgba(41, 184, 229, 1) 50%, rgba(188, 224, 238, 1) 100%);
   }
 }
+
